@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conjugueur — French Verb Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #faf9f7;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f3f1ed;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #9a9a9a;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --error: #dc2626;
+      --error-light: #fee2e2;
+      --warning: #d97706;
+      --warning-light: #fef3c7;
+      --border: #e5e5e5;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-lg: 0 4px 20px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    [data-theme="dark"] {
+      --bg-primary: #0f0f0f;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #252525;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --accent: #60a5fa;
+      --accent-light: #1e3a5f;
+      --success: #34d399;
+      --success-light: #064e3b;
+      --error: #f87171;
+      --error-light: #450a0a;
+      --warning: #fbbf24;
+      --warning-light: #451a03;
+      --border: #333333;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-lg: 0 4px 20px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .logo span { color: var(--accent); }
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .header-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--bg-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .header-btn:hover {
+      border-color: var(--accent);
+    }
+    .header-btn svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-primary);
+    }
+    .timer-display {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-weight: 500;
+    }
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-tertiary);
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .tab.active {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      box-shadow: var(--shadow);
+    }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .daily-checklist {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .checklist-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+    .checklist-items {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .checklist-item.done {
+      color: var(--success);
+    }
+    .checklist-item .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .checklist-item.done .check {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+    .goal-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .goal-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .goal-count {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    .goal-track {
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .goal-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #7c3aed);
+      border-radius: 4px;
+      transition: width 0.4s;
+    }
+    .tense-selector {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .tense-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .tense-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tense-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tense-pill {
+      padding: 6px 10px;
+      border-radius: 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1.5px solid transparent;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+    }
+    .tense-pill:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    .tense-pill.active {
+      background: var(--accent);
+      color: white;
+    }
+    .main-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .verb-header {
+      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+      padding: 24px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .essential-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.25);
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    .weak-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(251,191,36,0.3);
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    .current-tense {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+    .verb-infinitive {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+    .verb-meaning {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .verb-group {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+    .conjugation-section { padding: 18px; }
+    .conjugation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 500px) {
+      .conjugation-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    .conj-row { position: relative; }
+    .conj-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .conj-input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.2s;
+    }
+    .conj-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+    }
+    .conj-input.correct {
+      border-color: var(--success);
+      background: var(--success-light);
+    }
+    .conj-input.incorrect {
+      border-color: var(--error);
+      background: var(--error-light);
+    }
+    .conj-input:disabled { opacity: 1; }
+    .answer-hint {
+      font-size: 0.75rem;
+      color: var(--success);
+      margin-top: 3px;
+      min-height: 18px;
+      font-weight: 500;
+    }
+    .result-banner {
+      padding: 14px 20px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+    .result-banner.show { display: block; }
+    .result-banner.perfect { background: var(--success-light); color: var(--success); }
+    .result-banner.good { background: var(--accent-light); color: var(--accent); }
+    .result-banner.practice { background: var(--error-light); color: var(--error); }
+    .tip-section {
+      background: var(--bg-tertiary);
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+    .tip-section.show { display: block; }
+    .tip-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .tip-content {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .action-bar {
+      padding: 16px 18px;
+      display: flex;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .btn {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--bg-primary); }
+    .btn svg { width: 16px; height: 16px; }
+    .hidden { display: none !important; }
+    .keyboard-hint {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    kbd {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: inherit;
+      font-size: 0.65rem;
+    }
+    .stats-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .stats-section {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-section:last-child { border-bottom: none; }
+    .stats-section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .weak-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .weak-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+    }
+    .weak-item-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .weak-item-stat {
+      font-size: 0.8rem;
+      color: var(--error);
+      font-weight: 500;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .history-day {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: var(--bg-tertiary);
+    }
+    .history-day.practiced { background: var(--success); }
+    .history-day.partial { background: var(--warning); }
+    .all-time-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .all-time-item {
+      text-align: center;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+    }
+    .all-time-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .all-time-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .reset-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--error-light);
+      color: var(--error);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 12px;
+    }
+    .reset-btn:hover { filter: brightness(0.95); }
+    .empty-state {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Conjugueur<span>.</span></div>
+      <div class="header-actions">
+        <div class="timer-display" id="timer">00:00</div>
+        <button class="header-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="moonIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="practice">Practice</button>
+      <button class="tab" data-tab="stats">My Stats</button>
+    </div>
+
+    <div class="panel active" id="practicePanel">
+      <div class="daily-checklist">
+        <div class="checklist-title">Daily Essentials</div>
+        <div class="checklist-items">
+          <div class="checklist-item" id="checkEtre">
+            <div class="check"><svg class="hidden" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+            <span>être</span>
+          </div>
+          <div class="checklist-item" id="checkAvoir">
+            <div class="check"><svg class="hidden" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+            <span>avoir</span>
+          </div>
+          <div class="checklist-item" id="checkGoal">
+            <div class="check"><svg class="hidden" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+            <span>15 verbs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-value" id="streak">0</div>
+          <div class="stat-label">Streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="score">0/0</div>
+          <div class="stat-label">Perfect</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="accuracy">—</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="dayStreak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+
+      <div class="goal-bar">
+        <div class="goal-header">
+          <span class="goal-title">🎯 Daily Goal</span>
+          <span class="goal-count" id="goalCount">0/15</span>
+        </div>
+        <div class="goal-track">
+          <div class="goal-fill" id="goalFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="tense-selector">
+        <div class="tense-header">
+          <span class="tense-title">Active Tenses</span>
+          <span class="tense-title" id="tenseCount">7</span>
+        </div>
+        <div class="tense-pills" id="tensePills"></div>
+      </div>
+
+      <div class="main-card">
+        <div class="verb-header">
+          <div class="essential-tag hidden" id="essentialTag">⭐ ESSENTIAL</div>
+          <div class="weak-tag hidden" id="weakTag">⚠️ WEAK</div>
+          <div class="current-tense" id="currentTense">—</div>
+          <div class="verb-infinitive" id="infinitive">—</div>
+          <div class="verb-meaning" id="meaning">—</div>
+          <div class="verb-group" id="verbGroup">—</div>
+        </div>
+
+        <div class="conjugation-section">
+          <div class="conjugation-grid" id="conjGrid"></div>
+        </div>
+
+        <div class="result-banner" id="resultBanner"></div>
+
+        <div class="tip-section" id="tipSection">
+          <div class="tip-label">💡 Pattern Tip</div>
+          <div class="tip-content" id="tipContent"></div>
+        </div>
+
+        <div class="action-bar">
+          <button class="btn btn-secondary" id="btnShow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            Reveal
+          </button>
+          <button class="btn btn-primary" id="btnCheck">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Check
+          </button>
+          <button class="btn btn-primary hidden" id="btnNext">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="keyboard-hint">
+          <kbd>Tab</kbd> next field · <kbd>Enter</kbd> check/next
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="statsPanel">
+      <div class="stats-panel">
+        <div class="stats-section">
+          <div class="stats-section-title">All-Time Performance</div>
+          <div class="all-time-stats">
+            <div class="all-time-item">
+              <div class="all-time-value" id="totalVerbs">0</div>
+              <div class="all-time-label">Verbs Done</div>
+            </div>
+            <div class="all-time-item">
+              <div class="all-time-value" id="totalPerfect">0</div>
+              <div class="all-time-label">Perfect</div>
+            </div>
+            <div class="all-time-item">
+              <div class="all-time-value" id="totalAccuracy">—</div>
+              <div class="all-time-label">Accuracy</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-section">
+          <div class="stats-section-title">Last 28 Days</div>
+          <div class="history-grid" id="historyGrid"></div>
+        </div>
+
+        <div class="stats-section">
+          <div class="stats-section-title">Weak Verbs (Need Practice)</div>
+          <div class="weak-list" id="weakVerbsList">
+            <div class="empty-state">Complete more practice to see patterns!</div>
+          </div>
+        </div>
+
+        <div class="stats-section">
+          <div class="stats-section-title">Weak Tenses</div>
+          <div class="weak-list" id="weakTensesList">
+            <div class="empty-state">Complete more practice to see patterns!</div>
+          </div>
+        </div>
+
+        <div class="stats-section">
+          <button class="reset-btn" id="resetBtn">Reset All Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const verbs = [
+      { infinitive: "être", meaning: "to be", group: "irregular", essential: true },
+      { infinitive: "avoir", meaning: "to have", group: "irregular", essential: true },
+      { infinitive: "faire", meaning: "to do/make", group: "irregular" },
+      { infinitive: "aller", meaning: "to go", group: "irregular" },
+      { infinitive: "pouvoir", meaning: "to be able to", group: "irregular" },
+      { infinitive: "vouloir", meaning: "to want", group: "irregular" },
+      { infinitive: "devoir", meaning: "to have to", group: "irregular" },
+      { infinitive: "savoir", meaning: "to know", group: "irregular" },
+      { infinitive: "venir", meaning: "to come", group: "-ir" },
+      { infinitive: "prendre", meaning: "to take", group: "-re" },
+      { infinitive: "dire", meaning: "to say", group: "irregular" },
+      { infinitive: "mettre", meaning: "to put", group: "-re" },
+      { infinitive: "voir", meaning: "to see", group: "irregular" },
+      { infinitive: "partir", meaning: "to leave", group: "-ir" },
+      { infinitive: "sortir", meaning: "to go out", group: "-ir" },
+      { infinitive: "finir", meaning: "to finish", group: "-ir" },
+      { infinitive: "choisir", meaning: "to choose", group: "-ir" },
+      { infinitive: "attendre", meaning: "to wait", group: "-re" },
+      { infinitive: "répondre", meaning: "to answer", group: "-re" },
+      { infinitive: "écrire", meaning: "to write", group: "irregular" }
+    ];
+
+    const tenses = [
+      { id: "present", name: "Présent", level: "A1" },
+      { id: "passeCompose", name: "Passé Composé", level: "A2" },
+      { id: "imparfait", name: "Imparfait", level: "A2" },
+      { id: "futurSimple", name: "Futur Simple", level: "B1" },
+      { id: "conditionnel", name: "Conditionnel", level: "B1" },
+      { id: "subjonctif", name: "Subjonctif", level: "B2" },
+      { id: "plusQueParfait", name: "Plus-que-parfait", level: "B2" }
+    ];
+
+    const pronouns = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
+
+    const conjugations = {
+      "être": {
+        present: ["suis", "es", "est", "sommes", "êtes", "sont"],
+        passeCompose: ["ai été", "as été", "a été", "avons été", "avez été", "ont été"],
+        imparfait: ["étais", "étais", "était", "étions", "étiez", "étaient"],
+        futurSimple: ["serai", "seras", "sera", "serons", "serez", "seront"],
+        conditionnel: ["serais", "serais", "serait", "serions", "seriez", "seraient"],
+        subjonctif: ["sois", "sois", "soit", "soyons", "soyez", "soient"],
+        plusQueParfait: ["avais été", "avais été", "avait été", "avions été", "aviez été", "avaient été"]
+      },
+      "avoir": {
+        present: ["ai", "as", "a", "avons", "avez", "ont"],
+        passeCompose: ["ai eu", "as eu", "a eu", "avons eu", "avez eu", "ont eu"],
+        imparfait: ["avais", "avais", "avait", "avions", "aviez", "avaient"],
+        futurSimple: ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
+        conditionnel: ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
+        subjonctif: ["aie", "aies", "ait", "ayons", "ayez", "aient"],
+        plusQueParfait: ["avais eu", "avais eu", "avait eu", "avions eu", "aviez eu", "avaient eu"]
+      },
+      "faire": {
+        present: ["fais", "fais", "fait", "faisons", "faites", "font"],
+        passeCompose: ["ai fait", "as fait", "a fait", "avons fait", "avez fait", "ont fait"],
+        imparfait: ["faisais", "faisais", "faisait", "faisions", "faisiez", "faisaient"],
+        futurSimple: ["ferai", "feras", "fera", "ferons", "ferez", "feront"],
+        conditionnel: ["ferais", "ferais", "ferait", "ferions", "feriez", "feraient"],
+        subjonctif: ["fasse", "fasses", "fasse", "fassions", "fassiez", "fassent"],
+        plusQueParfait: ["avais fait", "avais fait", "avait fait", "avions fait", "aviez fait", "avaient fait"]
+      },
+      "aller": {
+        present: ["vais", "vas", "va", "allons", "allez", "vont"],
+        passeCompose: ["suis allé(e)", "es allé(e)", "est allé(e)", "sommes allé(e)s", "êtes allé(e)(s)", "sont allé(e)s"],
+        imparfait: ["allais", "allais", "allait", "allions", "alliez", "allaient"],
+        futurSimple: ["irai", "iras", "ira", "irons", "irez", "iront"],
+        conditionnel: ["irais", "irais", "irait", "irions", "iriez", "iraient"],
+        subjonctif: ["aille", "ailles", "aille", "allions", "alliez", "aillent"],
+        plusQueParfait: ["étais allé(e)", "étais allé(e)", "était allé(e)", "étions allé(e)s", "étiez allé(e)(s)", "étaient allé(e)s"]
+      },
+      "pouvoir": {
+        present: ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"],
+        passeCompose: ["ai pu", "as pu", "a pu", "avons pu", "avez pu", "ont pu"],
+        imparfait: ["pouvais", "pouvais", "pouvait", "pouvions", "pouviez", "pouvaient"],
+        futurSimple: ["pourrai", "pourras", "pourra", "pourrons", "pourrez", "pourront"],
+        conditionnel: ["pourrais", "pourrais", "pourrait", "pourrions", "pourriez", "pourraient"],
+        subjonctif: ["puisse", "puisses", "puisse", "puissions", "puissiez", "puissent"],
+        plusQueParfait: ["avais pu", "avais pu", "avait pu", "avions pu", "aviez pu", "avaient pu"]
+      },
+      "vouloir": {
+        present: ["veux", "veux", "veut", "voulons", "voulez", "veulent"],
+        passeCompose: ["ai voulu", "as voulu", "a voulu", "avons voulu", "avez voulu", "ont voulu"],
+        imparfait: ["voulais", "voulais", "voulait", "voulions", "vouliez", "voulaient"],
+        futurSimple: ["voudrai", "voudras", "voudra", "voudrons", "voudrez", "voudront"],
+        conditionnel: ["voudrais", "voudrais", "voudrait", "voudrions", "voudriez", "voudraient"],
+        subjonctif: ["veuille", "veuilles", "veuille", "voulions", "vouliez", "veuillent"],
+        plusQueParfait: ["avais voulu", "avais voulu", "avait voulu", "avions voulu", "aviez voulu", "avaient voulu"]
+      },
+      "devoir": {
+        present: ["dois", "dois", "doit", "devons", "devez", "doivent"],
+        passeCompose: ["ai dû", "as dû", "a dû", "avons dû", "avez dû", "ont dû"],
+        imparfait: ["devais", "devais", "devait", "devions", "deviez", "devaient"],
+        futurSimple: ["devrai", "devras", "devra", "devrons", "devrez", "devront"],
+        conditionnel: ["devrais", "devrais", "devrait", "devrions", "devriez", "devraient"],
+        subjonctif: ["doive", "doives", "doive", "devions", "deviez", "doivent"],
+        plusQueParfait: ["avais dû", "avais dû", "avait dû", "avions dû", "aviez dû", "avaient dû"]
+      },
+      "savoir": {
+        present: ["sais", "sais", "sait", "savons", "savez", "savent"],
+        passeCompose: ["ai su", "as su", "a su", "avons su", "avez su", "ont su"],
+        imparfait: ["savais", "savais", "savait", "savions", "saviez", "savaient"],
+        futurSimple: ["saurai", "sauras", "saura", "saurons", "saurez", "sauront"],
+        conditionnel: ["saurais", "saurais", "saurait", "saurions", "sauriez", "sauraient"],
+        subjonctif: ["sache", "saches", "sache", "sachions", "sachiez", "sachent"],
+        plusQueParfait: ["avais su", "avais su", "avait su", "avions su", "aviez su", "avaient su"]
+      },
+      "venir": {
+        present: ["viens", "viens", "vient", "venons", "venez", "viennent"],
+        passeCompose: ["suis venu(e)", "es venu(e)", "est venu(e)", "sommes venu(e)s", "êtes venu(e)(s)", "sont venu(e)s"],
+        imparfait: ["venais", "venais", "venait", "venions", "veniez", "venaient"],
+        futurSimple: ["viendrai", "viendras", "viendra", "viendrons", "viendrez", "viendront"],
+        conditionnel: ["viendrais", "viendrais", "viendrait", "viendrions", "viendriez", "viendraient"],
+        subjonctif: ["vienne", "viennes", "vienne", "venions", "veniez", "viennent"],
+        plusQueParfait: ["étais venu(e)", "étais venu(e)", "était venu(e)", "étions venu(e)s", "étiez venu(e)(s)", "étaient venu(e)s"]
+      },
+      "prendre": {
+        present: ["prends", "prends", "prend", "prenons", "prenez", "prennent"],
+        passeCompose: ["ai pris", "as pris", "a pris", "avons pris", "avez pris", "ont pris"],
+        imparfait: ["prenais", "prenais", "prenait", "prenions", "preniez", "prenaient"],
+        futurSimple: ["prendrai", "prendras", "prendra", "prendrons", "prendrez", "prendront"],
+        conditionnel: ["prendrais", "prendrais", "prendrait", "prendrions", "prendriez", "prendraient"],
+        subjonctif: ["prenne", "prennes", "prenne", "prenions", "preniez", "prennent"],
+        plusQueParfait: ["avais pris", "avais pris", "avait pris", "avions pris", "aviez pris", "avaient pris"]
+      },
+      "dire": {
+        present: ["dis", "dis", "dit", "disons", "dites", "disent"],
+        passeCompose: ["ai dit", "as dit", "a dit", "avons dit", "avez dit", "ont dit"],
+        imparfait: ["disais", "disais", "disait", "disions", "disiez", "disaient"],
+        futurSimple: ["dirai", "diras", "dira", "dirons", "direz", "diront"],
+        conditionnel: ["dirais", "dirais", "dirait", "dirions", "diriez", "diraient"],
+        subjonctif: ["dise", "dises", "dise", "disions", "disiez", "disent"],
+        plusQueParfait: ["avais dit", "avais dit", "avait dit", "avions dit", "aviez dit", "avaient dit"]
+      },
+      "mettre": {
+        present: ["mets", "mets", "met", "mettons", "mettez", "mettent"],
+        passeCompose: ["ai mis", "as mis", "a mis", "avons mis", "avez mis", "ont mis"],
+        imparfait: ["mettais", "mettais", "mettait", "mettions", "mettiez", "mettaient"],
+        futurSimple: ["mettrai", "mettras", "mettra", "mettrons", "mettrez", "mettront"],
+        conditionnel: ["mettrais", "mettrais", "mettrait", "mettrions", "mettriez", "mettraient"],
+        subjonctif: ["mette", "mettes", "mette", "mettions", "mettiez", "mettent"],
+        plusQueParfait: ["avais mis", "avais mis", "avait mis", "avions mis", "aviez mis", "avaient mis"]
+      },
+      "voir": {
+        present: ["vois", "vois", "voit", "voyons", "voyez", "voient"],
+        passeCompose: ["ai vu", "as vu", "a vu", "avons vu", "avez vu", "ont vu"],
+        imparfait: ["voyais", "voyais", "voyait", "voyions", "voyiez", "voyaient"],
+        futurSimple: ["verrai", "verras", "verra", "verrons", "verrez", "verront"],
+        conditionnel: ["verrais", "verrais", "verrait", "verrions", "verriez", "verraient"],
+        subjonctif: ["voie", "voies", "voie", "voyions", "voyiez", "voient"],
+        plusQueParfait: ["avais vu", "avais vu", "avait vu", "avions vu", "aviez vu", "avaient vu"]
+      },
+      "partir": {
+        present: ["pars", "pars", "part", "partons", "partez", "partent"],
+        passeCompose: ["suis parti(e)", "es parti(e)", "est parti(e)", "sommes parti(e)s", "êtes parti(e)(s)", "sont parti(e)s"],
+        imparfait: ["partais", "partais", "partait", "partions", "partiez", "partaient"],
+        futurSimple: ["partirai", "partiras", "partira", "partirons", "partirez", "partiront"],
+        conditionnel: ["partirais", "partirais", "partirait", "partirions", "partiriez", "partiraient"],
+        subjonctif: ["parte", "partes", "parte", "partions", "partiez", "partent"],
+        plusQueParfait: ["étais parti(e)", "étais parti(e)", "était parti(e)", "étions parti(e)s", "étiez parti(e)(s)", "étaient parti(e)s"]
+      },
+      "sortir": {
+        present: ["sors", "sors", "sort", "sortons", "sortez", "sortent"],
+        passeCompose: ["suis sorti(e)", "es sorti(e)", "est sorti(e)", "sommes sorti(e)s", "êtes sorti(e)(s)", "sont sorti(e)s"],
+        imparfait: ["sortais", "sortais", "sortait", "sortions", "sortiez", "sortaient"],
+        futurSimple: ["sortirai", "sortiras", "sortira", "sortirons", "sortirez", "sortiront"],
+        conditionnel: ["sortirais", "sortirais", "sortirait", "sortirions", "sortiriez", "sortiraient"],
+        subjonctif: ["sorte", "sortes", "sorte", "sortions", "sortiez", "sortent"],
+        plusQueParfait: ["étais sorti(e)", "étais sorti(e)", "était sorti(e)", "étions sorti(e)s", "étiez sorti(e)(s)", "étaient sorti(e)s"]
+      },
+      "finir": {
+        present: ["finis", "finis", "finit", "finissons", "finissez", "finissent"],
+        passeCompose: ["ai fini", "as fini", "a fini", "avons fini", "avez fini", "ont fini"],
+        imparfait: ["finissais", "finissais", "finissait", "finissions", "finissiez", "finissaient"],
+        futurSimple: ["finirai", "finiras", "finira", "finirons", "finirez", "finiront"],
+        conditionnel: ["finirais", "finirais", "finirait", "finirions", "finiriez", "finiraient"],
+        subjonctif: ["finisse", "finisses", "finisse", "finissions", "finissiez", "finissent"],
+        plusQueParfait: ["avais fini", "avais fini", "avait fini", "avions fini", "aviez fini", "avaient fini"]
+      },
+      "choisir": {
+        present: ["choisis", "choisis", "choisit", "choisissons", "choisissez", "choisissent"],
+        passeCompose: ["ai choisi", "as choisi", "a choisi", "avons choisi", "avez choisi", "ont choisi"],
+        imparfait: ["choisissais", "choisissais", "choisissait", "choisissions", "choisissiez", "choisissaient"],
+        futurSimple: ["choisirai", "choisiras", "choisira", "choisirons", "choisirez", "choisiront"],
+        conditionnel: ["choisirais", "choisirais", "choisirait", "choisirions", "choisiriez", "choisiraient"],
+        subjonctif: ["choisisse", "choisisses", "choisisse", "choisissions", "choisissiez", "choisissent"],
+        plusQueParfait: ["avais choisi", "avais choisi", "avait choisi", "avions choisi", "aviez choisi", "avaient choisi"]
+      },
+      "attendre": {
+        present: ["attends", "attends", "attend", "attendons", "attendez", "attendent"],
+        passeCompose: ["ai attendu", "as attendu", "a attendu", "avons attendu", "avez attendu", "ont attendu"],
+        imparfait: ["attendais", "attendais", "attendait", "attendions", "attendiez", "attendaient"],
+        futurSimple: ["attendrai", "attendras", "attendra", "attendrons", "attendrez", "attendront"],
+        conditionnel: ["attendrais", "attendrais", "attendrait", "attendrions", "attendriez", "attendraient"],
+        subjonctif: ["attende", "attendes", "attende", "attendions", "attendiez", "attendent"],
+        plusQueParfait: ["avais attendu", "avais attendu", "avait attendu", "avions attendu", "aviez attendu", "avaient attendu"]
+      },
+      "répondre": {
+        present: ["réponds", "réponds", "répond", "répondons", "répondez", "répondent"],
+        passeCompose: ["ai répondu", "as répondu", "a répondu", "avons répondu", "avez répondu", "ont répondu"],
+        imparfait: ["répondais", "répondais", "répondait", "répondions", "répondiez", "répondaient"],
+        futurSimple: ["répondrai", "répondras", "répondra", "répondrons", "répondrez", "répondront"],
+        conditionnel: ["répondrais", "répondrais", "répondrait", "répondrions", "répondriez", "répondraient"],
+        subjonctif: ["réponde", "répondes", "réponde", "répondions", "répondiez", "répondent"],
+        plusQueParfait: ["avais répondu", "avais répondu", "avait répondu", "avions répondu", "aviez répondu", "avaient répondu"]
+      },
+      "écrire": {
+        present: ["écris", "écris", "écrit", "écrivons", "écrivez", "écrivent"],
+        passeCompose: ["ai écrit", "as écrit", "a écrit", "avons écrit", "avez écrit", "ont écrit"],
+        imparfait: ["écrivais", "écrivais", "écrivait", "écrivions", "écriviez", "écrivaient"],
+        futurSimple: ["écrirai", "écriras", "écrira", "écrirons", "écrirez", "écriront"],
+        conditionnel: ["écrirais", "écrirais", "écrirait", "écririons", "écririez", "écriraient"],
+        subjonctif: ["écrive", "écrives", "écrive", "écrivions", "écriviez", "écrivent"],
+        plusQueParfait: ["avais écrit", "avais écrit", "avait écrit", "avions écrit", "aviez écrit", "avaient écrit"]
+      }
+    };
+
+    const tips = {
+      present: "Présent: Focus on stem changes. Irregular verbs often change in je/tu/il/ils forms.",
+      passeCompose: "Passé Composé: être or avoir + past participle. DR MRS VANDERTRAMP verbs use être!",
+      imparfait: "Imparfait: nous présent stem + -ais, -ais, -ait, -ions, -iez, -aient.",
+      futurSimple: "Futur: Infinitive + avoir endings (ai, as, a, ons, ez, ont). Irregulars have special stems.",
+      conditionnel: "Conditionnel: Futur stem + imparfait endings (-ais, -ais, -ait, -ions, -iez, -aient).",
+      subjonctif: "Subjonctif: ils présent stem + -e, -es, -e, -ions, -iez, -ent. Many irregulars!",
+      plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. Action before another past."
+    };
+
+    let activeTenses = ["present", "passeCompose", "imparfait", "futurSimple", "conditionnel", "subjonctif", "plusQueParfait"];
+    let currentVerb = null;
+    let currentTense = null;
+    let streak = 0;
+    let correct = 0;
+    let total = 0;
+    let checked = false;
+    let verbsCompleted = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let isDark = false;
+
+    let sessionEtreDone = false;
+    let sessionAvoirDone = false;
+
+    let perfData = loadPerfData();
+
+    function loadPerfData() {
+      try {
+        const stored = localStorage.getItem("conjugueur-perf");
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      return {
+        totalVerbs: 0,
+        totalPerfect: 0,
+        verbStats: {},
+        tenseStats: {},
+        history: [],
+        lastSessionDate: null,
+        dayStreak: 0
+      };
+    }
+
+    function savePerfData() {
+      try {
+        localStorage.setItem("conjugueur-perf", JSON.stringify(perfData));
+      } catch (e) {}
+    }
+
+    function getTodayStr() {
+      return new Date().toISOString().split("T")[0];
+    }
+
+    function init() {
+      loadTheme();
+      checkDayStreak();
+      renderTensePills();
+      renderHistoryGrid();
+      renderWeakLists();
+      updateAllTimeStats();
+      startTimer();
+      nextVerb();
+      setupTabs();
+    }
+
+    function checkDayStreak() {
+      const today = getTodayStr();
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+      if (perfData.lastSessionDate === yesterday) {
+      } else if (perfData.lastSessionDate !== today) {
+        perfData.dayStreak = 0;
+      }
+    }
+
+    function setupTabs() {
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+          document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.tab + "Panel").classList.add("active");
+          if (tab.dataset.tab === "stats") {
+            renderWeakLists();
+            updateAllTimeStats();
+          }
+        });
+      });
+    }
+
+    function loadTheme() {
+      isDark = localStorage.getItem("conjugueur-theme") === "dark";
+      applyTheme();
+    }
+
+    function applyTheme() {
+      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+      document.getElementById("sunIcon").classList.toggle("hidden", isDark);
+      document.getElementById("moonIcon").classList.toggle("hidden", !isDark);
+    }
+
+    function toggleTheme() {
+      isDark = !isDark;
+      localStorage.setItem("conjugueur-theme", isDark ? "dark" : "light");
+      applyTheme();
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const m = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+        const s = (timerSeconds % 60).toString().padStart(2, "0");
+        document.getElementById("timer").textContent = `${m}:${s}`;
+      }, 1000);
+    }
+
+    function renderTensePills() {
+      const container = document.getElementById("tensePills");
+      container.innerHTML = tenses.map(t => `
+        <div class="tense-pill ${activeTenses.includes(t.id) ? 'active' : ''}" 
+             data-id="${t.id}" onclick="toggleTense('${t.id}')">
+          ${t.name}
+        </div>
+      `).join("");
+      document.getElementById("tenseCount").textContent = activeTenses.length;
+    }
+
+    function toggleTense(id) {
+      if (activeTenses.includes(id)) {
+        if (activeTenses.length > 1) activeTenses = activeTenses.filter(t => t !== id);
+      } else {
+        activeTenses.push(id);
+      }
+      renderTensePills();
+    }
+
+    function pickNextVerb() {
+      if (!sessionEtreDone) {
+        sessionEtreDone = true;
+        return verbs.find(v => v.infinitive === "être");
+      }
+      if (!sessionAvoirDone) {
+        sessionAvoirDone = true;
+        return verbs.find(v => v.infinitive === "avoir");
+      }
+
+      const weakVerbs = getWeakVerbs();
+      if (weakVerbs.length > 0 && Math.random() < 0.4) {
+        const weakVerb = weakVerbs[Math.floor(Math.random() * weakVerbs.length)];
+        return verbs.find(v => v.infinitive === weakVerb) || verbs[Math.floor(Math.random() * verbs.length)];
+      }
+
+      return verbs[Math.floor(Math.random() * verbs.length)];
+    }
+
+    function pickNextTense() {
+      const weakTenses = getWeakTenses();
+      const activeWeak = weakTenses.filter(t => activeTenses.includes(t));
+      if (activeWeak.length > 0 && Math.random() < 0.4) {
+        return activeWeak[Math.floor(Math.random() * activeWeak.length)];
+      }
+      return activeTenses[Math.floor(Math.random() * activeTenses.length)];
+    }
+
+    function getWeakVerbs() {
+      const dominated = [];
+      for (const [verb, stats] of Object.entries(perfData.verbStats)) {
+        if (stats.total >= 3) {
+          const rate = stats.perfect / stats.total;
+          if (rate < 0.6) dominated.push(verb);
+        }
+      }
+      return dominated;
+    }
+
+    function getWeakTenses() {
+      const dominated = [];
+      for (const [tense, stats] of Object.entries(perfData.tenseStats)) {
+        if (stats.total >= 3) {
+          const rate = stats.perfect / stats.total;
+          if (rate < 0.6) dominated.push(tense);
+        }
+      }
+      return dominated;
+    }
+
+    function nextVerb() {
+      checked = false;
+      currentVerb = pickNextVerb();
+      currentTense = pickNextTense();
+
+      document.getElementById("infinitive").textContent = currentVerb.infinitive;
+      document.getElementById("meaning").textContent = currentVerb.meaning;
+      document.getElementById("currentTense").textContent = tenses.find(t => t.id === currentTense).name;
+      document.getElementById("verbGroup").textContent = currentVerb.group;
+
+      const essentialTag = document.getElementById("essentialTag");
+      essentialTag.classList.toggle("hidden", !currentVerb.essential);
+
+      const weakTag = document.getElementById("weakTag");
+      const isWeak = getWeakVerbs().includes(currentVerb.infinitive) || getWeakTenses().includes(currentTense);
+      weakTag.classList.toggle("hidden", !isWeak);
+
+      renderInputs();
+      document.getElementById("resultBanner").className = "result-banner";
+      document.getElementById("tipSection").classList.remove("show");
+      document.getElementById("btnCheck").classList.remove("hidden");
+      document.getElementById("btnNext").classList.add("hidden");
+      document.getElementById("btnShow").classList.remove("hidden");
+
+      setTimeout(() => document.querySelector(".conj-input")?.focus(), 50);
+    }
+
+    function renderInputs() {
+      const grid = document.getElementById("conjGrid");
+      grid.innerHTML = pronouns.map((p, i) => `
+        <div class="conj-row">
+          <div class="conj-label">${p}</div>
+          <input type="text" class="conj-input" data-index="${i}" 
+                 onkeydown="handleKey(event)" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <div class="answer-hint" id="hint-${i}"></div>
+        </div>
+      `).join("");
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        checked ? nextVerb() : checkAnswers();
+      } else if (e.key === "Tab" && !e.shiftKey) {
+        const inputs = document.querySelectorAll(".conj-input");
+        const idx = parseInt(e.target.dataset.index);
+        if (idx < inputs.length - 1) {
+          e.preventDefault();
+          inputs[idx + 1].focus();
+        }
+      }
+    }
+
+    function normalize(s) {
+      return s.toLowerCase().trim().replace(/\s+/g, " ").replace(/[']/g, "'");
+    }
+
+    function checkAnswers() {
+      checked = true;
+      const inputs = document.querySelectorAll(".conj-input");
+      const answers = conjugations[currentVerb.infinitive][currentTense];
+      let correctCount = 0;
+
+      inputs.forEach((inp, i) => {
+        const user = normalize(inp.value);
+        const valid = answers[i].split("/").flatMap(a => {
+          const base = normalize(a);
+          const alts = [base];
+          if (base.includes("(e)")) alts.push(base.replace(/\(e\)/g, ""), base.replace(/\(e\)/g, "e"));
+          if (base.includes("(s)")) alts.push(base.replace(/\(s\)/g, ""), base.replace(/\(s\)/g, "s"));
+          return alts;
+        });
+
+        if (valid.includes(user)) {
+          inp.classList.add("correct");
+          correctCount++;
+        } else {
+          inp.classList.add("incorrect");
+          document.getElementById(`hint-${i}`).textContent = `→ ${answers[i]}`;
+        }
+        inp.disabled = true;
+      });
+
+      total++;
+      verbsCompleted++;
+      const isPerfect = correctCount === 6;
+      if (isPerfect) { correct++; streak++; }
+      else { streak = 0; }
+
+      recordPerformance(currentVerb.infinitive, currentTense, isPerfect);
+
+      updateSessionStats();
+      updateGoal();
+      updateChecklist();
+      showResult(correctCount);
+
+      document.getElementById("tipSection").classList.add("show");
+      document.getElementById("tipContent").textContent = tips[currentTense];
+      document.getElementById("btnCheck").classList.add("hidden");
+      document.getElementById("btnNext").classList.remove("hidden");
+      document.getElementById("btnShow").classList.add("hidden");
+    }
+
+    function recordPerformance(verb, tense, perfect) {
+      perfData.totalVerbs++;
+      if (perfect) perfData.totalPerfect++;
+
+      if (!perfData.verbStats[verb]) perfData.verbStats[verb] = { total: 0, perfect: 0 };
+      perfData.verbStats[verb].total++;
+      if (perfect) perfData.verbStats[verb].perfect++;
+
+      if (!perfData.tenseStats[tense]) perfData.tenseStats[tense] = { total: 0, perfect: 0 };
+      perfData.tenseStats[tense].total++;
+      if (perfect) perfData.tenseStats[tense].perfect++;
+
+      const today = getTodayStr();
+      let todayEntry = perfData.history.find(h => h.date === today);
+      if (!todayEntry) {
+        todayEntry = { date: today, verbs: 0, perfect: 0 };
+        perfData.history.push(todayEntry);
+      }
+      todayEntry.verbs++;
+      if (perfect) todayEntry.perfect++;
+
+      if (perfData.lastSessionDate !== today) {
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+        if (perfData.lastSessionDate === yesterday) {
+          perfData.dayStreak++;
+        } else {
+          perfData.dayStreak = 1;
+        }
+        perfData.lastSessionDate = today;
+      }
+
+      if (perfData.history.length > 60) {
+        perfData.history = perfData.history.slice(-60);
+      }
+
+      savePerfData();
+    }
+
+    function showAnswers() {
+      const answers = conjugations[currentVerb.infinitive][currentTense];
+      answers.forEach((a, i) => {
+        document.getElementById(`hint-${i}`).textContent = a;
+      });
+    }
+
+    function showResult(n) {
+      const banner = document.getElementById("resultBanner");
+      if (n === 6) {
+        banner.className = "result-banner show perfect";
+        banner.textContent = "🎉 Perfect! 6/6";
+      } else if (n >= 4) {
+        banner.className = "result-banner show good";
+        banner.textContent = `👍 Good! ${n}/6`;
+      } else {
+        banner.className = "result-banner show practice";
+        banner.textContent = `📚 Keep going! ${n}/6`;
+      }
+    }
+
+    function updateSessionStats() {
+      document.getElementById("streak").textContent = streak;
+      document.getElementById("score").textContent = `${correct}/${total}`;
+      document.getElementById("accuracy").textContent = total ? `${Math.round(correct / total * 100)}%` : "—";
+      document.getElementById("dayStreak").textContent = perfData.dayStreak;
+    }
+
+    function updateGoal() {
+      const pct = Math.min(100, (verbsCompleted / 15) * 100);
+      document.getElementById("goalFill").style.width = `${pct}%`;
+      document.getElementById("goalCount").textContent = `${Math.min(verbsCompleted, 15)}/15`;
+    }
+
+    function updateChecklist() {
+      const etreEl = document.getElementById("checkEtre");
+      const avoirEl = document.getElementById("checkAvoir");
+      const goalEl = document.getElementById("checkGoal");
+
+      if (sessionEtreDone) {
+        etreEl.classList.add("done");
+        etreEl.querySelector("svg").classList.remove("hidden");
+      }
+      if (sessionAvoirDone) {
+        avoirEl.classList.add("done");
+        avoirEl.querySelector("svg").classList.remove("hidden");
+      }
+      if (verbsCompleted >= 15) {
+        goalEl.classList.add("done");
+        goalEl.querySelector("svg").classList.remove("hidden");
+      }
+    }
+
+    function renderHistoryGrid() {
+      const grid = document.getElementById("historyGrid");
+      const days = [];
+      for (let i = 27; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000);
+        days.push(d.toISOString().split("T")[0]);
+      }
+      grid.innerHTML = days.map(day => {
+        const entry = perfData.history.find(h => h.date === day);
+        let cls = "";
+        if (entry) {
+          cls = entry.verbs >= 15 ? "practiced" : "partial";
+        }
+        return `<div class="history-day ${cls}" title="${day}"></div>`;
+      }).join("");
+    }
+
+    function renderWeakLists() {
+      const verbsList = document.getElementById("weakVerbsList");
+      const tensesList = document.getElementById("weakTensesList");
+
+      const weakVerbs = [];
+      for (const [verb, stats] of Object.entries(perfData.verbStats)) {
+        if (stats.total >= 2) {
+          weakVerbs.push({ name: verb, rate: stats.perfect / stats.total, total: stats.total });
+        }
+      }
+      weakVerbs.sort((a, b) => a.rate - b.rate);
+      const topWeakVerbs = weakVerbs.filter(v => v.rate < 0.7).slice(0, 5);
+
+      if (topWeakVerbs.length > 0) {
+        verbsList.innerHTML = topWeakVerbs.map(v => `
+          <div class="weak-item">
+            <span class="weak-item-name">${v.name}</span>
+            <span class="weak-item-stat">${Math.round(v.rate * 100)}% (${v.total} tries)</span>
+          </div>
+        `).join("");
+      } else {
+        verbsList.innerHTML = `<div class="empty-state">No weak verbs yet — keep practicing!</div>`;
+      }
+
+      const weakTenses = [];
+      for (const [tense, stats] of Object.entries(perfData.tenseStats)) {
+        if (stats.total >= 2) {
+          const tenseName = tenses.find(t => t.id === tense)?.name || tense;
+          weakTenses.push({ name: tenseName, rate: stats.perfect / stats.total, total: stats.total });
+        }
+      }
+      weakTenses.sort((a, b) => a.rate - b.rate);
+      const topWeakTenses = weakTenses.filter(t => t.rate < 0.7).slice(0, 5);
+
+      if (topWeakTenses.length > 0) {
+        tensesList.innerHTML = topWeakTenses.map(t => `
+          <div class="weak-item">
+            <span class="weak-item-name">${t.name}</span>
+            <span class="weak-item-stat">${Math.round(t.rate * 100)}% (${t.total} tries)</span>
+          </div>
+        `).join("");
+      } else {
+        tensesList.innerHTML = `<div class="empty-state">No weak tenses yet — keep practicing!</div>`;
+      }
+    }
+
+    function updateAllTimeStats() {
+      document.getElementById("totalVerbs").textContent = perfData.totalVerbs;
+      document.getElementById("totalPerfect").textContent = perfData.totalPerfect;
+      const acc = perfData.totalVerbs > 0 ? Math.round(perfData.totalPerfect / perfData.totalVerbs * 100) + "%" : "—";
+      document.getElementById("totalAccuracy").textContent = acc;
+    }
+
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+    document.getElementById("btnCheck").addEventListener("click", checkAnswers);
+    document.getElementById("btnNext").addEventListener("click", nextVerb);
+    document.getElementById("btnShow").addEventListener("click", showAnswers);
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (confirm("Reset all your progress data? This cannot be undone.")) {
+        localStorage.removeItem("conjugueur-perf");
+        perfData = loadPerfData();
+        renderHistoryGrid();
+        renderWeakLists();
+        updateAllTimeStats();
+        alert("Data reset complete.");
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>
