@@ -316,6 +316,16 @@
       font-size: 0.65rem;
       font-weight: 600;
     }
+    .tef-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(52,211,153,0.3);
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
     .current-tense {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -565,6 +575,11 @@
       color: var(--text-muted);
       font-size: 0.9rem;
     }
+    .verb-count-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -606,6 +621,7 @@
             <span>15 verbs</span>
           </div>
         </div>
+        <div class="verb-count-badge">23 verbs total (20 core + 3 TEF essentials)</div>
       </div>
 
       <div class="stats-bar">
@@ -649,6 +665,7 @@
         <div class="verb-header">
           <div class="essential-tag hidden" id="essentialTag">⭐ ESSENTIAL</div>
           <div class="weak-tag hidden" id="weakTag">⚠️ WEAK</div>
+          <div class="tef-tag hidden" id="tefTag">📝 TEF B2</div>
           <div class="current-tense" id="currentTense">—</div>
           <div class="verb-infinitive" id="infinitive">—</div>
           <div class="verb-meaning" id="meaning">—</div>
@@ -750,18 +767,21 @@
       { infinitive: "vouloir", meaning: "to want", group: "irregular" },
       { infinitive: "devoir", meaning: "to have to", group: "irregular" },
       { infinitive: "savoir", meaning: "to know", group: "irregular" },
-      { infinitive: "venir", meaning: "to come", group: "-ir" },
+      { infinitive: "venir", meaning: "to come", group: "-ir (être)" },
       { infinitive: "prendre", meaning: "to take", group: "-re" },
       { infinitive: "dire", meaning: "to say", group: "irregular" },
       { infinitive: "mettre", meaning: "to put", group: "-re" },
       { infinitive: "voir", meaning: "to see", group: "irregular" },
-      { infinitive: "partir", meaning: "to leave", group: "-ir" },
-      { infinitive: "sortir", meaning: "to go out", group: "-ir" },
+      { infinitive: "partir", meaning: "to leave", group: "-ir (être)" },
+      { infinitive: "sortir", meaning: "to go out", group: "-ir (être)" },
       { infinitive: "finir", meaning: "to finish", group: "-ir" },
       { infinitive: "choisir", meaning: "to choose", group: "-ir" },
       { infinitive: "attendre", meaning: "to wait", group: "-re" },
       { infinitive: "répondre", meaning: "to answer", group: "-re" },
-      { infinitive: "écrire", meaning: "to write", group: "irregular" }
+      { infinitive: "écrire", meaning: "to write", group: "irregular" },
+      { infinitive: "devenir", meaning: "to become", group: "-ir (être)", tef: true },
+      { infinitive: "permettre", meaning: "to allow", group: "-re", tef: true },
+      { infinitive: "sembler", meaning: "to seem", group: "-er", tef: true }
     ];
 
     const tenses = [
@@ -956,17 +976,44 @@
         conditionnel: ["écrirais", "écrirais", "écrirait", "écririons", "écririez", "écriraient"],
         subjonctif: ["écrive", "écrives", "écrive", "écrivions", "écriviez", "écrivent"],
         plusQueParfait: ["avais écrit", "avais écrit", "avait écrit", "avions écrit", "aviez écrit", "avaient écrit"]
+      },
+      "devenir": {
+        present: ["deviens", "deviens", "devient", "devenons", "devenez", "deviennent"],
+        passeCompose: ["suis devenu(e)", "es devenu(e)", "est devenu(e)", "sommes devenu(e)s", "êtes devenu(e)(s)", "sont devenu(e)s"],
+        imparfait: ["devenais", "devenais", "devenait", "devenions", "deveniez", "devenaient"],
+        futurSimple: ["deviendrai", "deviendras", "deviendra", "deviendrons", "deviendrez", "deviendront"],
+        conditionnel: ["deviendrais", "deviendrais", "deviendrait", "deviendrions", "deviendriez", "deviendraient"],
+        subjonctif: ["devienne", "deviennes", "devienne", "devenions", "deveniez", "deviennent"],
+        plusQueParfait: ["étais devenu(e)", "étais devenu(e)", "était devenu(e)", "étions devenu(e)s", "étiez devenu(e)(s)", "étaient devenu(e)s"]
+      },
+      "permettre": {
+        present: ["permets", "permets", "permet", "permettons", "permettez", "permettent"],
+        passeCompose: ["ai permis", "as permis", "a permis", "avons permis", "avez permis", "ont permis"],
+        imparfait: ["permettais", "permettais", "permettait", "permettions", "permettiez", "permettaient"],
+        futurSimple: ["permettrai", "permettras", "permettra", "permettrons", "permettrez", "permettront"],
+        conditionnel: ["permettrais", "permettrais", "permettrait", "permettrions", "permettriez", "permettraient"],
+        subjonctif: ["permette", "permettes", "permette", "permettions", "permettiez", "permettent"],
+        plusQueParfait: ["avais permis", "avais permis", "avait permis", "avions permis", "aviez permis", "avaient permis"]
+      },
+      "sembler": {
+        present: ["semble", "sembles", "semble", "semblons", "semblez", "semblent"],
+        passeCompose: ["ai semblé", "as semblé", "a semblé", "avons semblé", "avez semblé", "ont semblé"],
+        imparfait: ["semblais", "semblais", "semblait", "semblions", "sembliez", "semblaient"],
+        futurSimple: ["semblerai", "sembleras", "semblera", "semblerons", "semblerez", "sembleront"],
+        conditionnel: ["semblerais", "semblerais", "semblerait", "semblerions", "sembleriez", "sembleraient"],
+        subjonctif: ["semble", "sembles", "semble", "semblions", "sembliez", "semblent"],
+        plusQueParfait: ["avais semblé", "avais semblé", "avait semblé", "avions semblé", "aviez semblé", "avaient semblé"]
       }
     };
 
     const tips = {
       present: "Présent: Focus on stem changes. Irregular verbs often change in je/tu/il/ils forms.",
-      passeCompose: "Passé Composé: être or avoir + past participle. DR MRS VANDERTRAMP verbs use être!",
+      passeCompose: "Passé Composé: être or avoir + past participle. DR MRS VANDERTRAMP verbs use être! Gender agreement with être verbs.",
       imparfait: "Imparfait: nous présent stem + -ais, -ais, -ait, -ions, -iez, -aient.",
       futurSimple: "Futur: Infinitive + avoir endings (ai, as, a, ons, ez, ont). Irregulars have special stems.",
-      conditionnel: "Conditionnel: Futur stem + imparfait endings (-ais, -ais, -ait, -ions, -iez, -aient).",
-      subjonctif: "Subjonctif: ils présent stem + -e, -es, -e, -ions, -iez, -ent. Many irregulars!",
-      plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. Action before another past."
+      conditionnel: "Conditionnel: Futur stem + imparfait endings (-ais, -ais, -ait, -ions, -iez, -aient). Used for reported speech in TEF!",
+      subjonctif: "Subjonctif: ils présent stem + -e, -es, -e, -ions, -iez, -ent. Triggered by 'bien que', 'il faut que', 'il est souhaitable que'.",
+      plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. For actions BEFORE other past actions. Essential for TEF Section A!"
     };
 
     let activeTenses = ["present", "passeCompose", "imparfait", "futurSimple", "conditionnel", "subjonctif", "plusQueParfait"];
@@ -1155,11 +1202,23 @@
       document.getElementById("verbGroup").textContent = currentVerb.group;
 
       const essentialTag = document.getElementById("essentialTag");
-      essentialTag.classList.toggle("hidden", !currentVerb.essential);
-
+      const tefTag = document.getElementById("tefTag");
       const weakTag = document.getElementById("weakTag");
+      
+      essentialTag.classList.add("hidden");
+      tefTag.classList.add("hidden");
+      weakTag.classList.add("hidden");
+
+      if (currentVerb.essential) {
+        essentialTag.classList.remove("hidden");
+      } else if (currentVerb.tef) {
+        tefTag.classList.remove("hidden");
+      }
+
       const isWeak = getWeakVerbs().includes(currentVerb.infinitive) || getWeakTenses().includes(currentTense);
-      weakTag.classList.toggle("hidden", !isWeak);
+      if (isWeak && !currentVerb.essential && !currentVerb.tef) {
+        weakTag.classList.remove("hidden");
+      }
 
       renderInputs();
       document.getElementById("resultBanner").className = "result-banner";
@@ -1212,8 +1271,26 @@
         const valid = answers[i].split("/").flatMap(a => {
           const base = normalize(a);
           const alts = [base];
-          if (base.includes("(e)")) alts.push(base.replace(/\(e\)/g, ""), base.replace(/\(e\)/g, "e"));
-          if (base.includes("(s)")) alts.push(base.replace(/\(s\)/g, ""), base.replace(/\(s\)/g, "s"));
+          if (base.includes("(e)")) {
+            alts.push(
+              base.replace(/\(e\)/g, ""),
+              base.replace(/\(e\)/g, "e")
+            );
+          }
+          if (base.includes("(s)")) {
+            alts.push(
+              base.replace(/\(s\)/g, ""),
+              base.replace(/\(s\)/g, "s")
+            );
+          }
+          if (base.includes("(e)") && base.includes("(s)")) {
+            alts.push(
+              base.replace(/\(e\)/g, "").replace(/\(s\)/g, ""),
+              base.replace(/\(e\)/g, "e").replace(/\(s\)/g, ""),
+              base.replace(/\(e\)/g, "").replace(/\(s\)/g, "s"),
+              base.replace(/\(e\)/g, "e").replace(/\(s\)/g, "s")
+            );
+          }
           return alts;
         });
 
