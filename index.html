@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conjugueur — French Verb Trainer</title>
+  <title>Conjugueur — French Verb Trainer for TEF Canada</title>
+  <meta name="description" content="Master French conjugation for TEF Canada exam. Practice 23 essential verbs across 8 tenses with adaptive learning, progress tracking, and spaced repetition.">
+  <meta name="keywords" content="French conjugation, TEF Canada, French verbs, conjugation practice, TEF exam prep, French grammar, NCLC, Express Entry French">
+  <meta name="author" content="Sabira Khan">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:title" content="Conjugueur — French Verb Trainer">
+  <meta property="og:description" content="Master French conjugation for TEF Canada. 23 verbs × 8 tenses = 184 combinations with smart practice.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇫🇷</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇫🇷</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
@@ -56,269 +66,125 @@
       min-height: 100vh;
       transition: background 0.3s, color 0.3s;
     }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 24px 20px 40px;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .logo {
-      font-family: 'Fraunces', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
+    .container { max-width: 720px; margin: 0 auto; padding: 24px 20px 40px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .logo { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; }
     .logo span { color: var(--accent); }
-    .header-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .header-actions { display: flex; gap: 8px; align-items: center; }
     .header-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border);
-      background: var(--bg-secondary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
+      width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--border);
+      background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center;
+      justify-content: center; transition: all 0.2s;
     }
     .header-btn:hover { border-color: var(--accent); }
-    .header-btn svg {
-      width: 18px;
-      height: 18px;
-      color: var(--text-primary);
-    }
+    .header-btn svg { width: 18px; height: 18px; color: var(--text-primary); }
     .timer-display {
-      font-variant-numeric: tabular-nums;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      background: var(--bg-tertiary);
-      padding: 6px 12px;
-      border-radius: 16px;
-      font-weight: 500;
+      font-variant-numeric: tabular-nums; font-size: 0.8rem; color: var(--text-secondary);
+      background: var(--bg-tertiary); padding: 6px 12px; border-radius: 16px; font-weight: 500;
     }
     .tabs {
-      display: flex;
-      gap: 4px;
-      background: var(--bg-tertiary);
-      padding: 4px;
-      border-radius: 10px;
-      margin-bottom: 16px;
+      display: flex; gap: 4px; background: var(--bg-tertiary); padding: 4px;
+      border-radius: 10px; margin-bottom: 16px;
     }
     .tab {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: transparent;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: inherit;
+      flex: 1; padding: 10px; border: none; background: transparent; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer;
+      transition: all 0.2s; font-family: inherit;
     }
-    .tab.active {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      box-shadow: var(--shadow);
-    }
+    .tab.active { background: var(--bg-secondary); color: var(--text-primary); box-shadow: var(--shadow); }
     .panel { display: none; }
     .panel.active { display: block; }
     .daily-checklist {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      margin-bottom: 16px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px; margin-bottom: 16px;
     }
     .checklist-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 10px;
+      font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;
     }
-    .checklist-items {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .checklist-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
+    .checklist-items { display: flex; gap: 12px; flex-wrap: wrap; }
+    .checklist-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-secondary); }
     .checklist-item.done { color: var(--success); }
     .checklist-item .check {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
     }
-    .checklist-item.done .check {
-      background: var(--success);
-      border-color: var(--success);
-      color: white;
+    .checklist-item.done .check { background: var(--success); border-color: var(--success); color: white; }
+    .coverage-bar {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
     }
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
+    .coverage-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .coverage-label { font-size: 0.75rem; color: var(--text-muted); }
+    .coverage-value { font-size: 0.75rem; font-weight: 600; color: var(--accent); }
+    .coverage-track { height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; }
+    .coverage-fill { height: 100%; background: linear-gradient(90deg, var(--success), #10b981); border-radius: 3px; transition: width 0.4s; }
+    .verb-tooltip-trigger {
+      font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; cursor: help;
+      display: inline-block; border-bottom: 1px dashed var(--text-muted); position: relative;
     }
+    .verb-tooltip {
+      display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 12px; width: 300px; box-shadow: var(--shadow-lg); z-index: 100; text-align: left; margin-bottom: 8px;
+    }
+    .verb-tooltip-trigger:hover .verb-tooltip { display: block; }
+    .verb-tooltip-title { font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+    .verb-tooltip-list { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6; }
+    .verb-tooltip-section { margin-bottom: 6px; }
+    .verb-tooltip-section strong { color: var(--accent); }
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
     .stat-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 8px;
-      text-align: center;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 12px 8px; text-align: center;
     }
-    .stat-value {
-      font-family: 'Fraunces', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-top: 4px;
-    }
+    .stat-value { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
     .goal-bar {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      margin-bottom: 16px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px; margin-bottom: 16px;
     }
-    .goal-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
+    .goal-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
     .goal-title { font-size: 0.8rem; font-weight: 600; }
     .goal-count { font-size: 0.8rem; color: var(--text-secondary); }
-    .goal-track {
-      height: 8px;
-      background: var(--bg-tertiary);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .goal-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #7c3aed);
-      border-radius: 4px;
-      transition: width 0.4s;
-    }
+    .goal-track { height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden; }
+    .goal-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #7c3aed); border-radius: 4px; transition: width 0.4s; }
     .tense-selector {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      margin-bottom: 16px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px; margin-bottom: 16px;
     }
-    .tense-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .tense-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+    .tense-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .tense-title { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
     .tense-pills { display: flex; flex-wrap: wrap; gap: 6px; }
     .tense-pill {
-      padding: 6px 10px;
-      border-radius: 14px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1.5px solid transparent;
-      background: var(--bg-tertiary);
-      color: var(--text-secondary);
+      padding: 6px 10px; border-radius: 14px; font-size: 0.75rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; border: 1.5px solid transparent; background: var(--bg-tertiary); color: var(--text-secondary);
     }
     .tense-pill:hover { background: var(--accent-light); color: var(--accent); }
     .tense-pill.active { background: var(--accent); color: white; }
     .main-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); overflow: hidden;
     }
     .verb-header {
       background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-      padding: 24px 20px;
-      text-align: center;
-      color: white;
-      position: relative;
+      padding: 24px 20px; text-align: center; color: white; position: relative;
     }
-    .tag-top-right {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 8px;
-      border-radius: 10px;
-      font-size: 0.65rem;
-      font-weight: 600;
+    .tag-top-right, .tag-top-left {
+      position: absolute; top: 10px; padding: 4px 8px; border-radius: 10px; font-size: 0.65rem; font-weight: 600;
     }
-    .tag-top-left {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 4px 8px;
-      border-radius: 10px;
-      font-size: 0.65rem;
-      font-weight: 600;
-    }
+    .tag-top-right { right: 10px; }
+    .tag-top-left { left: 10px; }
     .essential-tag { background: rgba(255,255,255,0.25); }
     .weak-tag { background: rgba(251,191,36,0.4); }
     .tef-tag { background: rgba(52,211,153,0.4); }
     .revealed-tag { background: rgba(239,68,68,0.5); }
-    .current-tense {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      opacity: 0.85;
-      margin-bottom: 4px;
-    }
-    .verb-infinitive {
-      font-family: 'Fraunces', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
+    .new-tag { background: rgba(139,92,246,0.5); }
+    .current-tense { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px; }
+    .verb-infinitive { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; }
     .verb-meaning { font-size: 0.9rem; opacity: 0.85; margin-top: 2px; }
     .verb-group {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 3px 10px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      font-size: 0.7rem;
-      font-weight: 500;
+      display: inline-block; margin-top: 8px; padding: 3px 10px; background: rgba(255,255,255,0.2);
+      border-radius: 10px; font-size: 0.7rem; font-weight: 500;
     }
     .conjugation-section { padding: 18px; }
     .conjugation-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -329,15 +195,8 @@
     .conj-row { position: relative; }
     .conj-label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
     .conj-input {
-      width: 100%;
-      padding: 11px 12px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      font-family: inherit;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      transition: all 0.2s;
+      width: 100%; padding: 11px 12px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+      font-size: 0.95rem; font-family: inherit; background: var(--bg-primary); color: var(--text-primary); transition: all 0.2s;
     }
     .conj-input:focus { outline: none; border-color: var(--accent); background: var(--bg-secondary); }
     .conj-input.correct { border-color: var(--success); background: var(--success-light); }
@@ -350,30 +209,15 @@
     .result-banner.good { background: var(--accent-light); color: var(--accent); }
     .result-banner.practice { background: var(--error-light); color: var(--error); }
     .result-banner.revealed { background: var(--warning-light); color: var(--warning); }
-    .tip-section {
-      background: var(--bg-tertiary);
-      padding: 14px 18px;
-      border-top: 1px solid var(--border);
-      display: none;
-    }
+    .tip-section { background: var(--bg-tertiary); padding: 14px 18px; border-top: 1px solid var(--border); display: none; }
     .tip-section.show { display: block; }
     .tip-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
     .tip-content { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
     .action-bar { padding: 16px 18px; display: flex; gap: 10px; border-top: 1px solid var(--border); }
     .btn {
-      flex: 1;
-      padding: 12px 20px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      flex: 1; padding: 12px 20px; border: none; border-radius: var(--radius-sm); font-size: 0.9rem;
+      font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
     }
     .btn-primary { background: var(--accent); color: white; }
     .btn-primary:hover { filter: brightness(1.1); }
@@ -402,53 +246,13 @@
     .reset-btn { width: 100%; padding: 12px; background: var(--error-light); color: var(--error); border: none; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 12px; }
     .reset-btn:hover { filter: brightness(0.95); }
     .empty-state { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.9rem; }
-    .verb-count-badge {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      cursor: help;
-      display: inline-block;
-      border-bottom: 1px dashed var(--text-muted);
-      position: relative;
-    }
-    .verb-tooltip {
-      display: none;
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px;
-      width: 300px;
-      box-shadow: var(--shadow-lg);
-      z-index: 100;
-      text-align: left;
-      margin-bottom: 8px;
-    }
-    .verb-count-badge:hover .verb-tooltip { display: block; }
-    .verb-tooltip-title { font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
-    .verb-tooltip-list { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6; }
-    .verb-tooltip-section { margin-bottom: 6px; }
-    .verb-tooltip-section strong { color: var(--accent); }
     .goal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
     }
     .goal-modal {
-      background: var(--bg-secondary);
-      border-radius: var(--radius);
-      padding: 32px;
-      text-align: center;
-      max-width: 400px;
-      margin: 20px;
-      box-shadow: var(--shadow-lg);
+      background: var(--bg-secondary); border-radius: var(--radius); padding: 32px;
+      text-align: center; max-width: 400px; margin: 20px; box-shadow: var(--shadow-lg);
     }
     .goal-emoji { font-size: 4rem; margin-bottom: 16px; }
     .goal-modal-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
@@ -459,6 +263,13 @@
     .goal-modal-stat-label { font-size: 0.75rem; color: var(--text-muted); }
     .goal-modal-buttons { display: flex; gap: 12px; }
     .goal-modal-buttons .btn { flex: 1; }
+    .combo-grid-section { margin-top: 16px; }
+    .combo-grid-title { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px; }
+    .combo-mini-grid { display: grid; grid-template-columns: repeat(23, 1fr); gap: 2px; }
+    .combo-cell { aspect-ratio: 1; border-radius: 2px; background: var(--bg-tertiary); }
+    .combo-cell.mastered { background: var(--success); }
+    .combo-cell.practiced { background: var(--warning); }
+    .combo-cell.weak { background: var(--error); }
   </style>
 </head>
 <body>
@@ -496,14 +307,29 @@
             <span>15 verbs</span>
           </div>
         </div>
-        <div class="verb-count-badge">
-          23 verbs × 8 tenses = 184 combinations
+        <div class="coverage-bar">
+          <div class="coverage-header">
+            <span class="coverage-label">Combo Coverage (all-time)</span>
+            <span class="coverage-value" id="coverageValue">0/184</span>
+          </div>
+          <div class="coverage-track">
+            <div class="coverage-fill" id="coverageFill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="verb-tooltip-trigger">
+          23 verbs × 8 tenses — hover for details
           <div class="verb-tooltip">
             <div class="verb-tooltip-title">All 23 Verbs</div>
             <div class="verb-tooltip-list">
               <div class="verb-tooltip-section"><strong>⭐ Essential:</strong> être, avoir</div>
               <div class="verb-tooltip-section"><strong>📝 TEF B2:</strong> devenir, permettre, sembler</div>
               <div class="verb-tooltip-section"><strong>Core 18:</strong> faire, aller, pouvoir, vouloir, devoir, savoir, venir, prendre, dire, mettre, voir, partir, sortir, finir, choisir, attendre, répondre, écrire</div>
+            </div>
+            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+              <div class="verb-tooltip-title">8 Tenses</div>
+              <div class="verb-tooltip-list">
+                Présent, Passé Composé, Imparfait, Futur Simple, Conditionnel, Subj. Présent, Subj. Passé, Plus-que-parfait
+              </div>
             </div>
           </div>
         </div>
@@ -552,6 +378,7 @@
           <div class="tag-top-left weak-tag hidden" id="weakTag">⚠️ WEAK</div>
           <div class="tag-top-left tef-tag hidden" id="tefTag">📝 TEF B2</div>
           <div class="tag-top-left revealed-tag hidden" id="revealedTag">👁 REVEALED</div>
+          <div class="tag-top-left new-tag hidden" id="newTag">✨ NEW</div>
           <div class="current-tense" id="currentTense">—</div>
           <div class="verb-infinitive" id="infinitive">—</div>
           <div class="verb-meaning" id="meaning">—</div>
@@ -595,7 +422,7 @@
           <div class="all-time-stats">
             <div class="all-time-item">
               <div class="all-time-value" id="totalVerbs">0</div>
-              <div class="all-time-label">Verbs Done</div>
+              <div class="all-time-label">Practiced</div>
             </div>
             <div class="all-time-item">
               <div class="all-time-value" id="totalPerfect">0</div>
@@ -606,18 +433,22 @@
               <div class="all-time-label">Accuracy</div>
             </div>
           </div>
+          <div class="combo-grid-section">
+            <div class="combo-grid-title">184 Combos: 🟩 mastered 🟨 practiced 🟥 weak ⬜ new</div>
+            <div class="combo-mini-grid" id="comboMiniGrid"></div>
+          </div>
         </div>
         <div class="stats-section">
           <div class="stats-section-title">Last 28 Days</div>
           <div class="history-grid" id="historyGrid"></div>
         </div>
         <div class="stats-section">
-          <div class="stats-section-title">Weak Verbs</div>
-          <div class="weak-list" id="weakVerbsList"><div class="empty-state">Complete more practice to see patterns!</div></div>
+          <div class="stats-section-title">Weak Combos (Priority)</div>
+          <div class="weak-list" id="weakCombosList"><div class="empty-state">Complete more practice!</div></div>
         </div>
         <div class="stats-section">
-          <div class="stats-section-title">Weak Tenses</div>
-          <div class="weak-list" id="weakTensesList"><div class="empty-state">Complete more practice to see patterns!</div></div>
+          <div class="stats-section-title">Never Practiced</div>
+          <div class="weak-list" id="neverPracticedList"><div class="empty-state">Loading...</div></div>
         </div>
         <div class="stats-section">
           <button class="reset-btn" id="resetBtn">Reset All Data</button>
@@ -679,15 +510,15 @@
       { infinitive: "sembler", meaning: "to seem", group: "-er", tef: true }
     ];
 
-    const tenses = [
-      { id: "present", name: "Présent", level: "A1" },
-      { id: "passeCompose", name: "Passé Composé", level: "A2" },
-      { id: "imparfait", name: "Imparfait", level: "A2" },
-      { id: "futurSimple", name: "Futur Simple", level: "B1" },
-      { id: "conditionnel", name: "Conditionnel", level: "B1" },
-      { id: "subjonctifPresent", name: "Subj. Présent", level: "B2" },
-      { id: "subjonctifPasse", name: "Subj. Passé", level: "B2" },
-      { id: "plusQueParfait", name: "Plus-que-parfait", level: "B2" }
+    const tenseList = [
+      { id: "present", name: "Présent" },
+      { id: "passeCompose", name: "Passé Composé" },
+      { id: "imparfait", name: "Imparfait" },
+      { id: "futurSimple", name: "Futur Simple" },
+      { id: "conditionnel", name: "Conditionnel" },
+      { id: "subjonctifPresent", name: "Subj. Présent" },
+      { id: "subjonctifPasse", name: "Subj. Passé" },
+      { id: "plusQueParfait", name: "Plus-que-parfait" }
     ];
 
     const pronouns = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
@@ -936,44 +767,96 @@
       plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. 'Il avait quitté...'"
     };
 
-    let activeTenses = ["present", "passeCompose", "imparfait", "futurSimple", "conditionnel", "subjonctifPresent", "subjonctifPasse", "plusQueParfait"];
-    let currentVerb = null;
-    let currentTense = null;
-    let streak = 0;
-    let correct = 0;
-    let total = 0;
-    let checked = false;
-    let revealed = false;
-    let verbsCompleted = 0;
-    let timerSeconds = 0;
-    let timerInterval = null;
-    let isDark = false;
-    let goalShown = false;
-    let sessionEtreDone = false;
-    let sessionAvoirDone = false;
+    const ALL_COMBOS = [];
+    verbs.forEach(v => tenseList.forEach(t => ALL_COMBOS.push(`${v.infinitive}__${t.id}`)));
+
+    let activeTenses = tenseList.map(t => t.id);
+    let currentVerb = null, currentTense = null;
+    let streak = 0, correct = 0, total = 0;
+    let checked = false, revealed = false, isNewCombo = false;
+    let verbsCompleted = 0, timerSeconds = 0, timerInterval = null;
+    let isDark = false, goalShown = false;
+    let sessionEtreDone = false, sessionAvoirDone = false;
     let sessionUsedCombos = new Set();
     let perfData = loadPerfData();
 
     function loadPerfData() {
       try {
-        const stored = localStorage.getItem("conjugueur-perf");
+        const stored = localStorage.getItem("conjugueur-v2");
         if (stored) return JSON.parse(stored);
       } catch (e) {}
-      return { totalVerbs: 0, totalPerfect: 0, verbStats: {}, tenseStats: {}, history: [], lastSessionDate: null, dayStreak: 0 };
+      return { comboStats: {}, history: [], lastSessionDate: null, dayStreak: 0 };
     }
 
     function savePerfData() {
-      try { localStorage.setItem("conjugueur-perf", JSON.stringify(perfData)); } catch (e) {}
+      try { localStorage.setItem("conjugueur-v2", JSON.stringify(perfData)); } catch (e) {}
     }
 
     function getTodayStr() { return new Date().toISOString().split("T")[0]; }
+
+    function getComboKey(v, t) { return `${v}__${t}`; }
+
+    function getComboStats(key) {
+      return perfData.comboStats[key] || { total: 0, perfect: 0, lastPracticed: null };
+    }
+
+    function isWeak(key) {
+      const s = getComboStats(key);
+      return s.total >= 2 && s.perfect / s.total < 0.6;
+    }
+
+    function isNeverPracticed(key) {
+      return !perfData.comboStats[key] || perfData.comboStats[key].total === 0;
+    }
+
+    function getCoverage() {
+      return ALL_COMBOS.filter(k => perfData.comboStats[k]?.total > 0).length;
+    }
+
+    function pickNextCombo() {
+      if (!sessionEtreDone) {
+        sessionEtreDone = true;
+        const t = activeTenses[Math.floor(Math.random() * activeTenses.length)];
+        return { verb: "être", tense: t };
+      }
+      if (!sessionAvoirDone) {
+        sessionAvoirDone = true;
+        const t = activeTenses[Math.floor(Math.random() * activeTenses.length)];
+        return { verb: "avoir", tense: t };
+      }
+
+      const validCombos = ALL_COMBOS.filter(k => {
+        const [v, t] = k.split("__");
+        return activeTenses.includes(t) && !sessionUsedCombos.has(k);
+      });
+
+      if (validCombos.length === 0) {
+        sessionUsedCombos.clear();
+        return pickNextCombo();
+      }
+
+      const weak = validCombos.filter(k => isWeak(k));
+      const never = validCombos.filter(k => isNeverPracticed(k));
+      const rest = validCombos.filter(k => !isWeak(k) && !isNeverPracticed(k));
+
+      let pool = [];
+      if (weak.length > 0) pool.push(...weak, ...weak, ...weak);
+      if (never.length > 0) pool.push(...never, ...never);
+      if (rest.length > 0) pool.push(...rest);
+
+      if (pool.length === 0) pool = validCombos;
+
+      const chosen = pool[Math.floor(Math.random() * pool.length)];
+      const [verb, tense] = chosen.split("__");
+      return { verb, tense };
+    }
 
     function init() {
       loadTheme();
       checkDayStreak();
       renderTensePills();
       renderHistoryGrid();
-      renderWeakLists();
+      updateCoverage();
       updateAllTimeStats();
       startTimer();
       nextVerb();
@@ -996,19 +879,14 @@
           document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
           tab.classList.add("active");
           document.getElementById(tab.dataset.tab + "Panel").classList.add("active");
-          if (tab.dataset.tab === "stats") { renderWeakLists(); updateAllTimeStats(); }
+          if (tab.dataset.tab === "stats") { renderWeakLists(); updateAllTimeStats(); renderComboGrid(); }
         });
       });
     }
 
     function setupGoalModal() {
-      document.getElementById("btnFinish").addEventListener("click", () => {
-        document.getElementById("goalOverlay").classList.add("hidden");
-      });
-      document.getElementById("btnContinue").addEventListener("click", () => {
-        document.getElementById("goalOverlay").classList.add("hidden");
-        nextVerb();
-      });
+      document.getElementById("btnFinish").addEventListener("click", () => document.getElementById("goalOverlay").classList.add("hidden"));
+      document.getElementById("btnContinue").addEventListener("click", () => { document.getElementById("goalOverlay").classList.add("hidden"); nextVerb(); });
     }
 
     function showGoalComplete() {
@@ -1016,28 +894,18 @@
       goalShown = true;
       document.getElementById("modalPerfect").textContent = correct;
       document.getElementById("modalAccuracy").textContent = total > 0 ? Math.round(correct / total * 100) + "%" : "0%";
-      const m = Math.floor(timerSeconds / 60);
-      const s = timerSeconds % 60;
+      const m = Math.floor(timerSeconds / 60), s = timerSeconds % 60;
       document.getElementById("modalTime").textContent = `${m}:${s.toString().padStart(2, "0")}`;
       document.getElementById("goalOverlay").classList.remove("hidden");
     }
 
-    function loadTheme() {
-      isDark = localStorage.getItem("conjugueur-theme") === "dark";
-      applyTheme();
-    }
-
+    function loadTheme() { isDark = localStorage.getItem("conjugueur-theme") === "dark"; applyTheme(); }
     function applyTheme() {
       document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
       document.getElementById("sunIcon").classList.toggle("hidden", isDark);
       document.getElementById("moonIcon").classList.toggle("hidden", !isDark);
     }
-
-    function toggleTheme() {
-      isDark = !isDark;
-      localStorage.setItem("conjugueur-theme", isDark ? "dark" : "light");
-      applyTheme();
-    }
+    function toggleTheme() { isDark = !isDark; localStorage.setItem("conjugueur-theme", isDark ? "dark" : "light"); applyTheme(); }
 
     function startTimer() {
       timerInterval = setInterval(() => {
@@ -1049,102 +917,38 @@
     }
 
     function renderTensePills() {
-      const container = document.getElementById("tensePills");
-      container.innerHTML = tenses.map(t => `<div class="tense-pill ${activeTenses.includes(t.id) ? 'active' : ''}" data-id="${t.id}" onclick="toggleTense('${t.id}')">${t.name}</div>`).join("");
+      document.getElementById("tensePills").innerHTML = tenseList.map(t =>
+        `<div class="tense-pill ${activeTenses.includes(t.id) ? 'active' : ''}" data-id="${t.id}" onclick="toggleTense('${t.id}')">${t.name}</div>`
+      ).join("");
       document.getElementById("tenseCount").textContent = activeTenses.length;
     }
 
     function toggleTense(id) {
-      if (activeTenses.includes(id)) {
-        if (activeTenses.length > 1) activeTenses = activeTenses.filter(t => t !== id);
-      } else {
-        activeTenses.push(id);
-      }
+      if (activeTenses.includes(id)) { if (activeTenses.length > 1) activeTenses = activeTenses.filter(t => t !== id); }
+      else { activeTenses.push(id); }
       renderTensePills();
     }
 
-    function getComboKey(verb, tense) { return `${verb}__${tense}`; }
-
-    function pickNextVerb() {
-      if (!sessionEtreDone) { sessionEtreDone = true; return verbs.find(v => v.infinitive === "être"); }
-      if (!sessionAvoirDone) { sessionAvoirDone = true; return verbs.find(v => v.infinitive === "avoir"); }
-
-      const weakVerbs = getWeakVerbs();
-      if (weakVerbs.length > 0 && Math.random() < 0.4) {
-        const shuffled = [...weakVerbs].sort(() => Math.random() - 0.5);
-        for (const wv of shuffled) {
-          const verb = verbs.find(v => v.infinitive === wv);
-          if (verb) {
-            for (const t of activeTenses.sort(() => Math.random() - 0.5)) {
-              if (!sessionUsedCombos.has(getComboKey(wv, t))) return verb;
-            }
-          }
-        }
-      }
-
-      const shuffledVerbs = [...verbs].sort(() => Math.random() - 0.5);
-      for (const verb of shuffledVerbs) {
-        for (const t of activeTenses.sort(() => Math.random() - 0.5)) {
-          if (!sessionUsedCombos.has(getComboKey(verb.infinitive, t))) return verb;
-        }
-      }
-
-      sessionUsedCombos.clear();
-      return verbs[Math.floor(Math.random() * verbs.length)];
-    }
-
-    function pickNextTense(verbInf) {
-      const weakTenses = getWeakTenses();
-      const availableTenses = activeTenses.filter(t => !sessionUsedCombos.has(getComboKey(verbInf, t)));
-      if (availableTenses.length === 0) return activeTenses[Math.floor(Math.random() * activeTenses.length)];
-
-      const availableWeak = weakTenses.filter(t => availableTenses.includes(t));
-      if (availableWeak.length > 0 && Math.random() < 0.4) {
-        return availableWeak[Math.floor(Math.random() * availableWeak.length)];
-      }
-      return availableTenses[Math.floor(Math.random() * availableTenses.length)];
-    }
-
-    function getWeakVerbs() {
-      const weak = [];
-      for (const [verb, stats] of Object.entries(perfData.verbStats)) {
-        if (stats.total >= 3 && stats.perfect / stats.total < 0.6) weak.push(verb);
-      }
-      return weak;
-    }
-
-    function getWeakTenses() {
-      const weak = [];
-      for (const [tense, stats] of Object.entries(perfData.tenseStats)) {
-        if (stats.total >= 3 && stats.perfect / stats.total < 0.6) weak.push(tense);
-      }
-      return weak;
-    }
-
     function nextVerb() {
-      checked = false;
-      revealed = false;
-      currentVerb = pickNextVerb();
-      currentTense = pickNextTense(currentVerb.infinitive);
-      sessionUsedCombos.add(getComboKey(currentVerb.infinitive, currentTense));
+      checked = false; revealed = false;
+      const { verb, tense } = pickNextCombo();
+      currentVerb = verbs.find(v => v.infinitive === verb);
+      currentTense = tense;
+      const comboKey = getComboKey(verb, tense);
+      sessionUsedCombos.add(comboKey);
+      isNewCombo = isNeverPracticed(comboKey);
 
       document.getElementById("infinitive").textContent = currentVerb.infinitive;
       document.getElementById("meaning").textContent = currentVerb.meaning;
-      document.getElementById("currentTense").textContent = tenses.find(t => t.id === currentTense).name;
+      document.getElementById("currentTense").textContent = tenseList.find(t => t.id === currentTense).name;
       document.getElementById("verbGroup").textContent = currentVerb.group;
 
-      document.getElementById("essentialTag").classList.add("hidden");
-      document.getElementById("tefTag").classList.add("hidden");
-      document.getElementById("weakTag").classList.add("hidden");
-      document.getElementById("revealedTag").classList.add("hidden");
+      ["essentialTag", "tefTag", "weakTag", "revealedTag", "newTag"].forEach(id => document.getElementById(id).classList.add("hidden"));
 
-      if (currentVerb.essential) {
-        document.getElementById("essentialTag").classList.remove("hidden");
-      } else if (currentVerb.tef) {
-        document.getElementById("tefTag").classList.remove("hidden");
-      } else if (getWeakVerbs().includes(currentVerb.infinitive) || getWeakTenses().includes(currentTense)) {
-        document.getElementById("weakTag").classList.remove("hidden");
-      }
+      if (isNewCombo) document.getElementById("newTag").classList.remove("hidden");
+      else if (isWeak(comboKey)) document.getElementById("weakTag").classList.remove("hidden");
+      else if (currentVerb.essential) document.getElementById("essentialTag").classList.remove("hidden");
+      else if (currentVerb.tef) document.getElementById("tefTag").classList.remove("hidden");
 
       renderInputs();
       document.getElementById("resultBanner").className = "result-banner";
@@ -1152,13 +956,13 @@
       document.getElementById("btnCheck").classList.remove("hidden");
       document.getElementById("btnNext").classList.add("hidden");
       document.getElementById("btnShow").classList.remove("hidden");
-
       setTimeout(() => document.querySelector(".conj-input")?.focus(), 50);
     }
 
     function renderInputs() {
-      const grid = document.getElementById("conjGrid");
-      grid.innerHTML = pronouns.map((p, i) => `<div class="conj-row"><div class="conj-label">${p}</div><input type="text" class="conj-input" data-index="${i}" onkeydown="handleKey(event)" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="answer-hint" id="hint-${i}"></div></div>`).join("");
+      document.getElementById("conjGrid").innerHTML = pronouns.map((p, i) =>
+        `<div class="conj-row"><div class="conj-label">${p}</div><input type="text" class="conj-input" data-index="${i}" onkeydown="handleKey(event)" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="answer-hint" id="hint-${i}"></div></div>`
+      ).join("");
     }
 
     function handleKey(e) {
@@ -1186,32 +990,22 @@
           if (base.includes("(e)")) alts.push(base.replace(/\(e\)/g, ""), base.replace(/\(e\)/g, "e"));
           if (base.includes("(s)")) alts.push(base.replace(/\(s\)/g, ""), base.replace(/\(s\)/g, "s"));
           if (base.includes("(e)") && base.includes("(s)")) {
-            alts.push(
-              base.replace(/\(e\)/g, "").replace(/\(s\)/g, ""),
-              base.replace(/\(e\)/g, "e").replace(/\(s\)/g, ""),
-              base.replace(/\(e\)/g, "").replace(/\(s\)/g, "s"),
-              base.replace(/\(e\)/g, "e").replace(/\(s\)/g, "s")
-            );
+            alts.push(base.replace(/\(e\)/g, "").replace(/\(s\)/g, ""), base.replace(/\(e\)/g, "e").replace(/\(s\)/g, ""),
+              base.replace(/\(e\)/g, "").replace(/\(s\)/g, "s"), base.replace(/\(e\)/g, "e").replace(/\(s\)/g, "s"));
           }
           return alts;
         });
-
         if (valid.includes(user)) { inp.classList.add("correct"); correctCount++; }
         else { inp.classList.add("incorrect"); document.getElementById(`hint-${i}`).textContent = `→ ${answers[i]}`; }
         inp.disabled = true;
       });
 
-      total++;
-      verbsCompleted++;
-
+      total++; verbsCompleted++;
       const isPerfect = correctCount === 6 && !revealed;
       if (isPerfect) { correct++; streak++; } else { streak = 0; }
 
       recordPerformance(currentVerb.infinitive, currentTense, isPerfect);
-      updateSessionStats();
-      updateGoal();
-      updateChecklist();
-      showResult(correctCount);
+      updateSessionStats(); updateGoal(); updateChecklist(); updateCoverage(); showResult(correctCount);
 
       document.getElementById("tipSection").classList.add("show");
       document.getElementById("tipContent").textContent = tips[currentTense];
@@ -1223,21 +1017,16 @@
     }
 
     function recordPerformance(verb, tense, perfect) {
-      perfData.totalVerbs++;
-      if (perfect) perfData.totalPerfect++;
-
-      if (!perfData.verbStats[verb]) perfData.verbStats[verb] = { total: 0, perfect: 0 };
-      perfData.verbStats[verb].total++;
-      if (perfect) perfData.verbStats[verb].perfect++;
-
-      if (!perfData.tenseStats[tense]) perfData.tenseStats[tense] = { total: 0, perfect: 0 };
-      perfData.tenseStats[tense].total++;
-      if (perfect) perfData.tenseStats[tense].perfect++;
+      const key = getComboKey(verb, tense);
+      if (!perfData.comboStats[key]) perfData.comboStats[key] = { total: 0, perfect: 0, lastPracticed: null };
+      perfData.comboStats[key].total++;
+      if (perfect) perfData.comboStats[key].perfect++;
+      perfData.comboStats[key].lastPracticed = getTodayStr();
 
       const today = getTodayStr();
       let todayEntry = perfData.history.find(h => h.date === today);
-      if (!todayEntry) { todayEntry = { date: today, verbs: 0, perfect: 0 }; perfData.history.push(todayEntry); }
-      todayEntry.verbs++;
+      if (!todayEntry) { todayEntry = { date: today, count: 0, perfect: 0 }; perfData.history.push(todayEntry); }
+      todayEntry.count++;
       if (perfect) todayEntry.perfect++;
 
       if (perfData.lastSessionDate !== today) {
@@ -1245,24 +1034,20 @@
         perfData.dayStreak = perfData.lastSessionDate === yesterday ? perfData.dayStreak + 1 : 1;
         perfData.lastSessionDate = today;
       }
-
       if (perfData.history.length > 60) perfData.history = perfData.history.slice(-60);
       savePerfData();
     }
 
     function showAnswers() {
       revealed = true;
-      const answers = conjugations[currentVerb.infinitive][currentTense];
-      answers.forEach((a, i) => { document.getElementById(`hint-${i}`).textContent = a; });
+      conjugations[currentVerb.infinitive][currentTense].forEach((a, i) => document.getElementById(`hint-${i}`).textContent = a);
       document.getElementById("revealedTag").classList.remove("hidden");
-      document.getElementById("essentialTag").classList.add("hidden");
-      document.getElementById("tefTag").classList.add("hidden");
-      document.getElementById("weakTag").classList.add("hidden");
+      ["essentialTag", "tefTag", "weakTag", "newTag"].forEach(id => document.getElementById(id).classList.add("hidden"));
     }
 
     function showResult(n) {
       const banner = document.getElementById("resultBanner");
-      if (revealed) { banner.className = "result-banner show revealed"; banner.textContent = "👁 Revealed — not counted as perfect"; }
+      if (revealed) { banner.className = "result-banner show revealed"; banner.textContent = "👁 Revealed — not counted"; }
       else if (n === 6) { banner.className = "result-banner show perfect"; banner.textContent = "🎉 Perfect! 6/6"; }
       else if (n >= 4) { banner.className = "result-banner show good"; banner.textContent = `👍 Good! ${n}/6`; }
       else { banner.className = "result-banner show practice"; banner.textContent = `📚 Keep going! ${n}/6`; }
@@ -1287,48 +1072,64 @@
       if (verbsCompleted >= 15) { document.getElementById("checkGoal").classList.add("done"); document.getElementById("checkGoal").querySelector("svg").classList.remove("hidden"); }
     }
 
+    function updateCoverage() {
+      const cov = getCoverage();
+      document.getElementById("coverageValue").textContent = `${cov}/184`;
+      document.getElementById("coverageFill").style.width = `${(cov / 184) * 100}%`;
+    }
+
     function renderHistoryGrid() {
-      const grid = document.getElementById("historyGrid");
       const days = [];
       for (let i = 27; i >= 0; i--) days.push(new Date(Date.now() - i * 86400000).toISOString().split("T")[0]);
-      grid.innerHTML = days.map(day => {
+      document.getElementById("historyGrid").innerHTML = days.map(day => {
         const entry = perfData.history.find(h => h.date === day);
-        let cls = entry ? (entry.verbs >= 15 ? "practiced" : "partial") : "";
+        let cls = entry ? (entry.count >= 15 ? "practiced" : "partial") : "";
         return `<div class="history-day ${cls}" title="${day}"></div>`;
       }).join("");
     }
 
     function renderWeakLists() {
-      const verbsList = document.getElementById("weakVerbsList");
-      const tensesList = document.getElementById("weakTensesList");
+      const weakList = document.getElementById("weakCombosList");
+      const neverList = document.getElementById("neverPracticedList");
 
-      const weakVerbs = Object.entries(perfData.verbStats)
-        .filter(([, s]) => s.total >= 2)
-        .map(([v, s]) => ({ name: v, rate: s.perfect / s.total, total: s.total }))
-        .sort((a, b) => a.rate - b.rate)
-        .filter(v => v.rate < 0.7)
-        .slice(0, 5);
+      const weakCombos = ALL_COMBOS.filter(k => isWeak(k)).map(k => {
+        const s = getComboStats(k);
+        const [v, t] = k.split("__");
+        return { key: k, verb: v, tense: tenseList.find(x => x.id === t)?.name || t, rate: s.perfect / s.total, total: s.total };
+      }).sort((a, b) => a.rate - b.rate).slice(0, 8);
 
-      verbsList.innerHTML = weakVerbs.length > 0
-        ? weakVerbs.map(v => `<div class="weak-item"><span class="weak-item-name">${v.name}</span><span class="weak-item-stat">${Math.round(v.rate * 100)}% (${v.total})</span></div>`).join("")
-        : `<div class="empty-state">No weak verbs yet!</div>`;
+      weakList.innerHTML = weakCombos.length > 0
+        ? weakCombos.map(c => `<div class="weak-item"><span class="weak-item-name">${c.verb} · ${c.tense}</span><span class="weak-item-stat">${Math.round(c.rate * 100)}% (${c.total})</span></div>`).join("")
+        : `<div class="empty-state">No weak combos yet!</div>`;
 
-      const weakTenses = Object.entries(perfData.tenseStats)
-        .filter(([, s]) => s.total >= 2)
-        .map(([t, s]) => ({ name: tenses.find(x => x.id === t)?.name || t, rate: s.perfect / s.total, total: s.total }))
-        .sort((a, b) => a.rate - b.rate)
-        .filter(t => t.rate < 0.7)
-        .slice(0, 5);
+      const neverCombos = ALL_COMBOS.filter(k => isNeverPracticed(k)).slice(0, 8).map(k => {
+        const [v, t] = k.split("__");
+        return { verb: v, tense: tenseList.find(x => x.id === t)?.name || t };
+      });
 
-      tensesList.innerHTML = weakTenses.length > 0
-        ? weakTenses.map(t => `<div class="weak-item"><span class="weak-item-name">${t.name}</span><span class="weak-item-stat">${Math.round(t.rate * 100)}% (${t.total})</span></div>`).join("")
-        : `<div class="empty-state">No weak tenses yet!</div>`;
+      neverList.innerHTML = neverCombos.length > 0
+        ? neverCombos.map(c => `<div class="weak-item"><span class="weak-item-name">${c.verb} · ${c.tense}</span><span class="weak-item-stat">NEW</span></div>`).join("")
+        : `<div class="empty-state">All 184 combos practiced! 🎉</div>`;
+    }
+
+    function renderComboGrid() {
+      document.getElementById("comboMiniGrid").innerHTML = ALL_COMBOS.map(k => {
+        const s = getComboStats(k);
+        let cls = "";
+        if (s.total === 0) cls = "";
+        else if (s.perfect / s.total >= 0.8) cls = "mastered";
+        else if (s.perfect / s.total < 0.5) cls = "weak";
+        else cls = "practiced";
+        return `<div class="combo-cell ${cls}" title="${k.replace('__', ' · ')}"></div>`;
+      }).join("");
     }
 
     function updateAllTimeStats() {
-      document.getElementById("totalVerbs").textContent = perfData.totalVerbs;
-      document.getElementById("totalPerfect").textContent = perfData.totalPerfect;
-      document.getElementById("totalAccuracy").textContent = perfData.totalVerbs > 0 ? Math.round(perfData.totalPerfect / perfData.totalVerbs * 100) + "%" : "—";
+      let totalPracticed = 0, totalPerfect = 0;
+      Object.values(perfData.comboStats).forEach(s => { totalPracticed += s.total; totalPerfect += s.perfect; });
+      document.getElementById("totalVerbs").textContent = totalPracticed;
+      document.getElementById("totalPerfect").textContent = totalPerfect;
+      document.getElementById("totalAccuracy").textContent = totalPracticed > 0 ? Math.round(totalPerfect / totalPracticed * 100) + "%" : "—";
     }
 
     document.getElementById("themeToggle").addEventListener("click", toggleTheme);
@@ -1337,11 +1138,9 @@
     document.getElementById("btnShow").addEventListener("click", showAnswers);
     document.getElementById("resetBtn").addEventListener("click", () => {
       if (confirm("Reset all progress? This cannot be undone.")) {
-        localStorage.removeItem("conjugueur-perf");
+        localStorage.removeItem("conjugueur-v2");
         perfData = loadPerfData();
-        renderHistoryGrid();
-        renderWeakLists();
-        updateAllTimeStats();
+        renderHistoryGrid(); updateCoverage(); updateAllTimeStats();
         alert("Data reset.");
       }
     });
