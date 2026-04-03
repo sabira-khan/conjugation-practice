@@ -518,7 +518,9 @@
       { id: "conditionnel", name: "Conditionnel" },
       { id: "subjonctifPresent", name: "Subj. Présent" },
       { id: "subjonctifPasse", name: "Subj. Passé" },
-      { id: "plusQueParfait", name: "Plus-que-parfait" }
+      { id: "plusQueParfait", name: "Plus-que-parfait" },
+      { id: "futurAnterieur", name: "Futur Antérieur" },
+      { id: "conditionnelPasse", name: "Cond. Passé" }
     ];
 
     const pronouns = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
@@ -532,7 +534,9 @@
         conditionnel: ["serais", "serais", "serait", "serions", "seriez", "seraient"],
         subjonctifPresent: ["sois", "sois", "soit", "soyons", "soyez", "soient"],
         subjonctifPasse: ["aie été", "aies été", "ait été", "ayons été", "ayez été", "aient été"],
-        plusQueParfait: ["avais été", "avais été", "avait été", "avions été", "aviez été", "avaient été"]
+        plusQueParfait: ["avais été", "avais été", "avait été", "avions été", "aviez été", "avaient été"],
+        futurAnterieur: ["aurai été", "auras été", "aura été", "aurons été", "aurez été", "auront été"],
+        conditionnelPasse: ["aurais été", "aurais été", "aurait été", "aurions été", "auriez été", "auraient été"]
       },
       "avoir": {
         present: ["ai", "as", "a", "avons", "avez", "ont"],
@@ -542,7 +546,9 @@
         conditionnel: ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
         subjonctifPresent: ["aie", "aies", "ait", "ayons", "ayez", "aient"],
         subjonctifPasse: ["aie eu", "aies eu", "ait eu", "ayons eu", "ayez eu", "aient eu"],
-        plusQueParfait: ["avais eu", "avais eu", "avait eu", "avions eu", "aviez eu", "avaient eu"]
+        plusQueParfait: ["avais eu", "avais eu", "avait eu", "avions eu", "aviez eu", "avaient eu"],
+        futurAnterieur: ["aurai eu", "auras eu", "aura eu", "aurons eu", "aurez eu", "auront eu"],
+        conditionnelPasse: ["aurais eu", "aurais eu", "aurait eu", "aurions eu", "auriez eu", "auraient eu"]
       },
       "faire": {
         present: ["fais", "fais", "fait", "faisons", "faites", "font"],
@@ -552,7 +558,9 @@
         conditionnel: ["ferais", "ferais", "ferait", "ferions", "feriez", "feraient"],
         subjonctifPresent: ["fasse", "fasses", "fasse", "fassions", "fassiez", "fassent"],
         subjonctifPasse: ["aie fait", "aies fait", "ait fait", "ayons fait", "ayez fait", "aient fait"],
-        plusQueParfait: ["avais fait", "avais fait", "avait fait", "avions fait", "aviez fait", "avaient fait"]
+        plusQueParfait: ["avais fait", "avais fait", "avait fait", "avions fait", "aviez fait", "avaient fait"],
+        futurAnterieur: ["aurai fait", "auras fait", "aura fait", "aurons fait", "aurez fait", "auront fait"],
+        conditionnelPasse: ["aurais fait", "aurais fait", "aurait fait", "aurions fait", "auriez fait", "auraient fait"]
       },
       "aller": {
         present: ["vais", "vas", "va", "allons", "allez", "vont"],
@@ -562,7 +570,9 @@
         conditionnel: ["irais", "irais", "irait", "irions", "iriez", "iraient"],
         subjonctifPresent: ["aille", "ailles", "aille", "allions", "alliez", "aillent"],
         subjonctifPasse: ["sois allé(e)", "sois allé(e)", "soit allé(e)", "soyons allé(e)s", "soyez allé(e)(s)", "soient allé(e)s"],
-        plusQueParfait: ["étais allé(e)", "étais allé(e)", "était allé(e)", "étions allé(e)s", "étiez allé(e)(s)", "étaient allé(e)s"]
+        plusQueParfait: ["étais allé(e)", "étais allé(e)", "était allé(e)", "étions allé(e)s", "étiez allé(e)(s)", "étaient allé(e)s"],
+        futurAnterieur: ["serai allé(e)", "seras allé(e)", "sera allé(e)", "serons allé(e)s", "serez allé(e)(s)", "seront allé(e)s"],
+        conditionnelPasse: ["serais allé(e)", "serais allé(e)", "serait allé(e)", "serions allé(e)s", "seriez allé(e)(s)", "seraient allé(e)s"]
       },
       "pouvoir": {
         present: ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"],
@@ -572,7 +582,9 @@
         conditionnel: ["pourrais", "pourrais", "pourrait", "pourrions", "pourriez", "pourraient"],
         subjonctifPresent: ["puisse", "puisses", "puisse", "puissions", "puissiez", "puissent"],
         subjonctifPasse: ["aie pu", "aies pu", "ait pu", "ayons pu", "ayez pu", "aient pu"],
-        plusQueParfait: ["avais pu", "avais pu", "avait pu", "avions pu", "aviez pu", "avaient pu"]
+        plusQueParfait: ["avais pu", "avais pu", "avait pu", "avions pu", "aviez pu", "avaient pu"],
+        futurAnterieur: ["aurai pu", "auras pu", "aura pu", "aurons pu", "aurez pu", "auront pu"],
+        conditionnelPasse: ["aurais pu", "aurais pu", "aurait pu", "aurions pu", "auriez pu", "auraient pu"]
       },
       "vouloir": {
         present: ["veux", "veux", "veut", "voulons", "voulez", "veulent"],
@@ -582,7 +594,9 @@
         conditionnel: ["voudrais", "voudrais", "voudrait", "voudrions", "voudriez", "voudraient"],
         subjonctifPresent: ["veuille", "veuilles", "veuille", "voulions", "vouliez", "veuillent"],
         subjonctifPasse: ["aie voulu", "aies voulu", "ait voulu", "ayons voulu", "ayez voulu", "aient voulu"],
-        plusQueParfait: ["avais voulu", "avais voulu", "avait voulu", "avions voulu", "aviez voulu", "avaient voulu"]
+        plusQueParfait: ["avais voulu", "avais voulu", "avait voulu", "avions voulu", "aviez voulu", "avaient voulu"],
+        futurAnterieur: ["aurai voulu", "auras voulu", "aura voulu", "aurons voulu", "aurez voulu", "auront voulu"],
+        conditionnelPasse: ["aurais voulu", "aurais voulu", "aurait voulu", "aurions voulu", "auriez voulu", "auraient voulu"]
       },
       "devoir": {
         present: ["dois", "dois", "doit", "devons", "devez", "doivent"],
@@ -592,7 +606,9 @@
         conditionnel: ["devrais", "devrais", "devrait", "devrions", "devriez", "devraient"],
         subjonctifPresent: ["doive", "doives", "doive", "devions", "deviez", "doivent"],
         subjonctifPasse: ["aie dû", "aies dû", "ait dû", "ayons dû", "ayez dû", "aient dû"],
-        plusQueParfait: ["avais dû", "avais dû", "avait dû", "avions dû", "aviez dû", "avaient dû"]
+        plusQueParfait: ["avais dû", "avais dû", "avait dû", "avions dû", "aviez dû", "avaient dû"],
+        futurAnterieur: ["aurai dû", "auras dû", "aura dû", "aurons dû", "aurez dû", "auront dû"],
+        conditionnelPasse: ["aurais dû", "aurais dû", "aurait dû", "aurions dû", "auriez dû", "auraient dû"]
       },
       "savoir": {
         present: ["sais", "sais", "sait", "savons", "savez", "savent"],
@@ -602,7 +618,9 @@
         conditionnel: ["saurais", "saurais", "saurait", "saurions", "sauriez", "sauraient"],
         subjonctifPresent: ["sache", "saches", "sache", "sachions", "sachiez", "sachent"],
         subjonctifPasse: ["aie su", "aies su", "ait su", "ayons su", "ayez su", "aient su"],
-        plusQueParfait: ["avais su", "avais su", "avait su", "avions su", "aviez su", "avaient su"]
+        plusQueParfait: ["avais su", "avais su", "avait su", "avions su", "aviez su", "avaient su"],
+        futurAnterieur: ["aurai su", "auras su", "aura su", "aurons su", "aurez su", "auront su"],
+        conditionnelPasse: ["aurais su", "aurais su", "aurait su", "aurions su", "auriez su", "auraient su"]
       },
       "venir": {
         present: ["viens", "viens", "vient", "venons", "venez", "viennent"],
@@ -612,7 +630,9 @@
         conditionnel: ["viendrais", "viendrais", "viendrait", "viendrions", "viendriez", "viendraient"],
         subjonctifPresent: ["vienne", "viennes", "vienne", "venions", "veniez", "viennent"],
         subjonctifPasse: ["sois venu(e)", "sois venu(e)", "soit venu(e)", "soyons venu(e)s", "soyez venu(e)(s)", "soient venu(e)s"],
-        plusQueParfait: ["étais venu(e)", "étais venu(e)", "était venu(e)", "étions venu(e)s", "étiez venu(e)(s)", "étaient venu(e)s"]
+        plusQueParfait: ["étais venu(e)", "étais venu(e)", "était venu(e)", "étions venu(e)s", "étiez venu(e)(s)", "étaient venu(e)s"],
+        futurAnterieur: ["serai venu(e)", "seras venu(e)", "sera venu(e)", "serons venu(e)s", "serez venu(e)(s)", "seront venu(e)s"],
+        conditionnelPasse: ["serais venu(e)", "serais venu(e)", "serait venu(e)", "serions venu(e)s", "seriez venu(e)(s)", "seraient venu(e)s"]
       },
       "prendre": {
         present: ["prends", "prends", "prend", "prenons", "prenez", "prennent"],
@@ -622,7 +642,9 @@
         conditionnel: ["prendrais", "prendrais", "prendrait", "prendrions", "prendriez", "prendraient"],
         subjonctifPresent: ["prenne", "prennes", "prenne", "prenions", "preniez", "prennent"],
         subjonctifPasse: ["aie pris", "aies pris", "ait pris", "ayons pris", "ayez pris", "aient pris"],
-        plusQueParfait: ["avais pris", "avais pris", "avait pris", "avions pris", "aviez pris", "avaient pris"]
+        plusQueParfait: ["avais pris", "avais pris", "avait pris", "avions pris", "aviez pris", "avaient pris"],
+        futurAnterieur: ["aurai pris", "auras pris", "aura pris", "aurons pris", "aurez pris", "auront pris"],
+        conditionnelPasse: ["aurais pris", "aurais pris", "aurait pris", "aurions pris", "auriez pris", "auraient pris"]
       },
       "dire": {
         present: ["dis", "dis", "dit", "disons", "dites", "disent"],
@@ -632,7 +654,9 @@
         conditionnel: ["dirais", "dirais", "dirait", "dirions", "diriez", "diraient"],
         subjonctifPresent: ["dise", "dises", "dise", "disions", "disiez", "disent"],
         subjonctifPasse: ["aie dit", "aies dit", "ait dit", "ayons dit", "ayez dit", "aient dit"],
-        plusQueParfait: ["avais dit", "avais dit", "avait dit", "avions dit", "aviez dit", "avaient dit"]
+        plusQueParfait: ["avais dit", "avais dit", "avait dit", "avions dit", "aviez dit", "avaient dit"],
+        futurAnterieur: ["aurai dit", "auras dit", "aura dit", "aurons dit", "aurez dit", "auront dit"],
+        conditionnelPasse: ["aurais dit", "aurais dit", "aurait dit", "aurions dit", "auriez dit", "auraient dit"]
       },
       "mettre": {
         present: ["mets", "mets", "met", "mettons", "mettez", "mettent"],
@@ -642,7 +666,9 @@
         conditionnel: ["mettrais", "mettrais", "mettrait", "mettrions", "mettriez", "mettraient"],
         subjonctifPresent: ["mette", "mettes", "mette", "mettions", "mettiez", "mettent"],
         subjonctifPasse: ["aie mis", "aies mis", "ait mis", "ayons mis", "ayez mis", "aient mis"],
-        plusQueParfait: ["avais mis", "avais mis", "avait mis", "avions mis", "aviez mis", "avaient mis"]
+        plusQueParfait: ["avais mis", "avais mis", "avait mis", "avions mis", "aviez mis", "avaient mis"],
+        futurAnterieur: ["aurai mis", "auras mis", "aura mis", "aurons mis", "aurez mis", "auront mis"],
+        conditionnelPasse: ["aurais mis", "aurais mis", "aurait mis", "aurions mis", "auriez mis", "auraient mis"]
       },
       "voir": {
         present: ["vois", "vois", "voit", "voyons", "voyez", "voient"],
@@ -652,7 +678,9 @@
         conditionnel: ["verrais", "verrais", "verrait", "verrions", "verriez", "verraient"],
         subjonctifPresent: ["voie", "voies", "voie", "voyions", "voyiez", "voient"],
         subjonctifPasse: ["aie vu", "aies vu", "ait vu", "ayons vu", "ayez vu", "aient vu"],
-        plusQueParfait: ["avais vu", "avais vu", "avait vu", "avions vu", "aviez vu", "avaient vu"]
+        plusQueParfait: ["avais vu", "avais vu", "avait vu", "avions vu", "aviez vu", "avaient vu"],
+        futurAnterieur: ["aurai vu", "auras vu", "aura vu", "aurons vu", "aurez vu", "auront vu"],
+        conditionnelPasse: ["aurais vu", "aurais vu", "aurait vu", "aurions vu", "auriez vu", "auraient vu"]
       },
       "partir": {
         present: ["pars", "pars", "part", "partons", "partez", "partent"],
@@ -662,7 +690,9 @@
         conditionnel: ["partirais", "partirais", "partirait", "partirions", "partiriez", "partiraient"],
         subjonctifPresent: ["parte", "partes", "parte", "partions", "partiez", "partent"],
         subjonctifPasse: ["sois parti(e)", "sois parti(e)", "soit parti(e)", "soyons parti(e)s", "soyez parti(e)(s)", "soient parti(e)s"],
-        plusQueParfait: ["étais parti(e)", "étais parti(e)", "était parti(e)", "étions parti(e)s", "étiez parti(e)(s)", "étaient parti(e)s"]
+        plusQueParfait: ["étais parti(e)", "étais parti(e)", "était parti(e)", "étions parti(e)s", "étiez parti(e)(s)", "étaient parti(e)s"],
+        futurAnterieur: ["serai parti(e)", "seras parti(e)", "sera parti(e)", "serons parti(e)s", "serez parti(e)(s)", "seront parti(e)s"],
+        conditionnelPasse: ["serais parti(e)", "serais parti(e)", "serait parti(e)", "serions parti(e)s", "seriez parti(e)(s)", "seraient parti(e)s"]
       },
       "sortir": {
         present: ["sors", "sors", "sort", "sortons", "sortez", "sortent"],
@@ -672,7 +702,9 @@
         conditionnel: ["sortirais", "sortirais", "sortirait", "sortirions", "sortiriez", "sortiraient"],
         subjonctifPresent: ["sorte", "sortes", "sorte", "sortions", "sortiez", "sortent"],
         subjonctifPasse: ["sois sorti(e)", "sois sorti(e)", "soit sorti(e)", "soyons sorti(e)s", "soyez sorti(e)(s)", "soient sorti(e)s"],
-        plusQueParfait: ["étais sorti(e)", "étais sorti(e)", "était sorti(e)", "étions sorti(e)s", "étiez sorti(e)(s)", "étaient sorti(e)s"]
+        plusQueParfait: ["étais sorti(e)", "étais sorti(e)", "était sorti(e)", "étions sorti(e)s", "étiez sorti(e)(s)", "étaient sorti(e)s"],
+        futurAnterieur: ["serai sorti(e)", "seras sorti(e)", "sera sorti(e)", "serons sorti(e)s", "serez sorti(e)(s)", "seront sorti(e)s"],
+        conditionnelPasse: ["serais sorti(e)", "serais sorti(e)", "serait sorti(e)", "serions sorti(e)s", "seriez sorti(e)(s)", "seraient sorti(e)s"]
       },
       "finir": {
         present: ["finis", "finis", "finit", "finissons", "finissez", "finissent"],
@@ -682,7 +714,9 @@
         conditionnel: ["finirais", "finirais", "finirait", "finirions", "finiriez", "finiraient"],
         subjonctifPresent: ["finisse", "finisses", "finisse", "finissions", "finissiez", "finissent"],
         subjonctifPasse: ["aie fini", "aies fini", "ait fini", "ayons fini", "ayez fini", "aient fini"],
-        plusQueParfait: ["avais fini", "avais fini", "avait fini", "avions fini", "aviez fini", "avaient fini"]
+        plusQueParfait: ["avais fini", "avais fini", "avait fini", "avions fini", "aviez fini", "avaient fini"],
+        futurAnterieur: ["aurai fini", "auras fini", "aura fini", "aurons fini", "aurez fini", "auront fini"],
+        conditionnelPasse: ["aurais fini", "aurais fini", "aurait fini", "aurions fini", "auriez fini", "auraient fini"]
       },
       "choisir": {
         present: ["choisis", "choisis", "choisit", "choisissons", "choisissez", "choisissent"],
@@ -692,7 +726,9 @@
         conditionnel: ["choisirais", "choisirais", "choisirait", "choisirions", "choisiriez", "choisiraient"],
         subjonctifPresent: ["choisisse", "choisisses", "choisisse", "choisissions", "choisissiez", "choisissent"],
         subjonctifPasse: ["aie choisi", "aies choisi", "ait choisi", "ayons choisi", "ayez choisi", "aient choisi"],
-        plusQueParfait: ["avais choisi", "avais choisi", "avait choisi", "avions choisi", "aviez choisi", "avaient choisi"]
+        plusQueParfait: ["avais choisi", "avais choisi", "avait choisi", "avions choisi", "aviez choisi", "avaient choisi"],
+        futurAnterieur: ["aurai choisi", "auras choisi", "aura choisi", "aurons choisi", "aurez choisi", "auront choisi"],
+        conditionnelPasse: ["aurais choisi", "aurais choisi", "aurait choisi", "aurions choisi", "auriez choisi", "auraient choisi"]
       },
       "attendre": {
         present: ["attends", "attends", "attend", "attendons", "attendez", "attendent"],
@@ -702,7 +738,9 @@
         conditionnel: ["attendrais", "attendrais", "attendrait", "attendrions", "attendriez", "attendraient"],
         subjonctifPresent: ["attende", "attendes", "attende", "attendions", "attendiez", "attendent"],
         subjonctifPasse: ["aie attendu", "aies attendu", "ait attendu", "ayons attendu", "ayez attendu", "aient attendu"],
-        plusQueParfait: ["avais attendu", "avais attendu", "avait attendu", "avions attendu", "aviez attendu", "avaient attendu"]
+        plusQueParfait: ["avais attendu", "avais attendu", "avait attendu", "avions attendu", "aviez attendu", "avaient attendu"],
+        futurAnterieur: ["aurai attendu", "auras attendu", "aura attendu", "aurons attendu", "aurez attendu", "auront attendu"],
+        conditionnelPasse: ["aurais attendu", "aurais attendu", "aurait attendu", "aurions attendu", "auriez attendu", "auraient attendu"]
       },
       "répondre": {
         present: ["réponds", "réponds", "répond", "répondons", "répondez", "répondent"],
@@ -712,7 +750,9 @@
         conditionnel: ["répondrais", "répondrais", "répondrait", "répondrions", "répondriez", "répondraient"],
         subjonctifPresent: ["réponde", "répondes", "réponde", "répondions", "répondiez", "répondent"],
         subjonctifPasse: ["aie répondu", "aies répondu", "ait répondu", "ayons répondu", "ayez répondu", "aient répondu"],
-        plusQueParfait: ["avais répondu", "avais répondu", "avait répondu", "avions répondu", "aviez répondu", "avaient répondu"]
+        plusQueParfait: ["avais répondu", "avais répondu", "avait répondu", "avions répondu", "aviez répondu", "avaient répondu"],
+        futurAnterieur: ["aurai répondu", "auras répondu", "aura répondu", "aurons répondu", "aurez répondu", "auront répondu"],
+        conditionnelPasse: ["aurais répondu", "aurais répondu", "aurait répondu", "aurions répondu", "auriez répondu", "auraient répondu"]
       },
       "écrire": {
         present: ["écris", "écris", "écrit", "écrivons", "écrivez", "écrivent"],
@@ -722,7 +762,9 @@
         conditionnel: ["écrirais", "écrirais", "écrirait", "écririons", "écririez", "écriraient"],
         subjonctifPresent: ["écrive", "écrives", "écrive", "écrivions", "écriviez", "écrivent"],
         subjonctifPasse: ["aie écrit", "aies écrit", "ait écrit", "ayons écrit", "ayez écrit", "aient écrit"],
-        plusQueParfait: ["avais écrit", "avais écrit", "avait écrit", "avions écrit", "aviez écrit", "avaient écrit"]
+        plusQueParfait: ["avais écrit", "avais écrit", "avait écrit", "avions écrit", "aviez écrit", "avaient écrit"],
+        futurAnterieur: ["aurai écrit", "auras écrit", "aura écrit", "aurons écrit", "aurez écrit", "auront écrit"],
+        conditionnelPasse: ["aurais écrit", "aurais écrit", "aurait écrit", "aurions écrit", "auriez écrit", "auraient écrit"]
       },
       "devenir": {
         present: ["deviens", "deviens", "devient", "devenons", "devenez", "deviennent"],
@@ -732,7 +774,9 @@
         conditionnel: ["deviendrais", "deviendrais", "deviendrait", "deviendrions", "deviendriez", "deviendraient"],
         subjonctifPresent: ["devienne", "deviennes", "devienne", "devenions", "deveniez", "deviennent"],
         subjonctifPasse: ["sois devenu(e)", "sois devenu(e)", "soit devenu(e)", "soyons devenu(e)s", "soyez devenu(e)(s)", "soient devenu(e)s"],
-        plusQueParfait: ["étais devenu(e)", "étais devenu(e)", "était devenu(e)", "étions devenu(e)s", "étiez devenu(e)(s)", "étaient devenu(e)s"]
+        plusQueParfait: ["étais devenu(e)", "étais devenu(e)", "était devenu(e)", "étions devenu(e)s", "étiez devenu(e)(s)", "étaient devenu(e)s"],
+        futurAnterieur: ["serai devenu(e)", "seras devenu(e)", "sera devenu(e)", "serons devenu(e)s", "serez devenu(e)(s)", "seront devenu(e)s"],
+        conditionnelPasse: ["serais devenu(e)", "serais devenu(e)", "serait devenu(e)", "serions devenu(e)s", "seriez devenu(e)(s)", "seraient devenu(e)s"]
       },
       "permettre": {
         present: ["permets", "permets", "permet", "permettons", "permettez", "permettent"],
@@ -742,7 +786,9 @@
         conditionnel: ["permettrais", "permettrais", "permettrait", "permettrions", "permettriez", "permettraient"],
         subjonctifPresent: ["permette", "permettes", "permette", "permettions", "permettiez", "permettent"],
         subjonctifPasse: ["aie permis", "aies permis", "ait permis", "ayons permis", "ayez permis", "aient permis"],
-        plusQueParfait: ["avais permis", "avais permis", "avait permis", "avions permis", "aviez permis", "avaient permis"]
+        plusQueParfait: ["avais permis", "avais permis", "avait permis", "avions permis", "aviez permis", "avaient permis"],
+        futurAnterieur: ["aurai permis", "auras permis", "aura permis", "aurons permis", "aurez permis", "auront permis"],
+        conditionnelPasse: ["aurais permis", "aurais permis", "aurait permis", "aurions permis", "auriez permis", "auraient permis"]
       },
       "sembler": {
         present: ["semble", "sembles", "semble", "semblons", "semblez", "semblent"],
@@ -752,7 +798,9 @@
         conditionnel: ["semblerais", "semblerais", "semblerait", "semblerions", "sembleriez", "sembleraient"],
         subjonctifPresent: ["semble", "sembles", "semble", "semblions", "sembliez", "semblent"],
         subjonctifPasse: ["aie semblé", "aies semblé", "ait semblé", "ayons semblé", "ayez semblé", "aient semblé"],
-        plusQueParfait: ["avais semblé", "avais semblé", "avait semblé", "avions semblé", "aviez semblé", "avaient semblé"]
+        plusQueParfait: ["avais semblé", "avais semblé", "avait semblé", "avions semblé", "aviez semblé", "avaient semblé"],
+        futurAnterieur: ["aurai semblé", "auras semblé", "aura semblé", "aurons semblé", "aurez semblé", "auront semblé"],
+        conditionnelPasse: ["aurais semblé", "aurais semblé", "aurait semblé", "aurions semblé", "auriez semblé", "auraient semblé"]
       }
     };
 
@@ -764,7 +812,9 @@
       conditionnel: "Conditionnel: Futur stem + imparfait endings. 'Il aurait déclaré que...'",
       subjonctifPresent: "Subj. Présent: ils présent stem + -e, -es, -e, -ions, -iez, -ent. After 'il faut que'.",
       subjonctifPasse: "Subj. Passé: Subj. of être/avoir + past participle. 'Bien qu'il ait fait...'",
-      plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. 'Il avait quitté...'"
+      plusQueParfait: "Plus-que-parfait: Imparfait être/avoir + past participle. 'Il avait quitté...'",
+      futurAnterieur: "Futur Antérieur: Futur simple être/avoir + past participle. 'Quand j'aurai fini...'",
+      conditionnelPasse: "Cond. Passé: Conditionnel être/avoir + past participle. 'J'aurais voulu...' Regrets & hypotheticals."
     };
 
     const ALL_COMBOS = [];
