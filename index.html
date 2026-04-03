@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conjugueur — French Verb Trainer for TEF Canada</title>
-  <meta name="description" content="Master French conjugation for TEF Canada exam. Practice 23 essential verbs across 8 tenses with adaptive learning, progress tracking, and spaced repetition.">
+  <meta name="description" content="Master French conjugation for TEF Canada exam. Practice 23 essential verbs across 10 tenses with adaptive learning, progress tracking, and spaced repetition.">
   <meta name="keywords" content="French conjugation, TEF Canada, French verbs, conjugation practice, TEF exam prep, French grammar, NCLC, Express Entry French">
   <meta name="author" content="Sabira Khan">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:title" content="Conjugueur — French Verb Trainer">
-  <meta property="og:description" content="Master French conjugation for TEF Canada. 23 verbs × 8 tenses = 184 combinations with smart practice.">
+  <meta property="og:description" content="Master French conjugation for TEF Canada. 23 verbs × 10 tenses = 230 combinations with smart practice.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇫🇷</text></svg>">
@@ -310,14 +310,14 @@
         <div class="coverage-bar">
           <div class="coverage-header">
             <span class="coverage-label">Combo Coverage (all-time)</span>
-            <span class="coverage-value" id="coverageValue">0/184</span>
+            <span class="coverage-value" id="coverageValue">0/230</span>
           </div>
           <div class="coverage-track">
             <div class="coverage-fill" id="coverageFill" style="width: 0%"></div>
           </div>
         </div>
         <div class="verb-tooltip-trigger">
-          23 verbs × 8 tenses — hover for details
+          23 verbs × 10 tenses — hover for details
           <div class="verb-tooltip">
             <div class="verb-tooltip-title">All 23 Verbs</div>
             <div class="verb-tooltip-list">
@@ -434,7 +434,7 @@
             </div>
           </div>
           <div class="combo-grid-section">
-            <div class="combo-grid-title">184 Combos: 🟩 mastered 🟨 practiced 🟥 weak ⬜ new</div>
+            <div class="combo-grid-title">230 Combos: 🟩 mastered 🟨 practiced 🟥 weak ⬜ new</div>
             <div class="combo-mini-grid" id="comboMiniGrid"></div>
           </div>
         </div>
@@ -1124,8 +1124,8 @@
 
     function updateCoverage() {
       const cov = getCoverage();
-      document.getElementById("coverageValue").textContent = `${cov}/184`;
-      document.getElementById("coverageFill").style.width = `${(cov / 184) * 100}%`;
+      document.getElementById("coverageValue").textContent = `${cov}/230`;
+      document.getElementById("coverageFill").style.width = `${(cov / 230) * 100}%`;
     }
 
     function renderHistoryGrid() {
@@ -1159,7 +1159,7 @@
 
       neverList.innerHTML = neverCombos.length > 0
         ? neverCombos.map(c => `<div class="weak-item"><span class="weak-item-name">${c.verb} · ${c.tense}</span><span class="weak-item-stat">NEW</span></div>`).join("")
-        : `<div class="empty-state">All 184 combos practiced! 🎉</div>`;
+        : `<div class="empty-state">All 230 combos practiced! 🎉</div>`;
     }
 
     function renderComboGrid() {
