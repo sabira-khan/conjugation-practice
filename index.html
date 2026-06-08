@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conjugueur — French Verb Trainer for TEF Canada</title>
-  <meta name="description" content="Master French conjugation for TEF Canada exam. Practice 23 essential verbs across 10 tenses with adaptive learning, progress tracking, and spaced repetition.">
+  <meta name="description" content="Master French conjugation for TEF Canada exam. Practice 30 essential verbs across 10 tenses with adaptive learning, progress tracking, and spaced repetition.">
   <meta name="keywords" content="French conjugation, TEF Canada, French verbs, conjugation practice, TEF exam prep, French grammar, NCLC, Express Entry French">
   <meta name="author" content="Sabira Khan">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:title" content="Conjugueur — French Verb Trainer">
-  <meta property="og:description" content="Master French conjugation for TEF Canada. 23 verbs × 10 tenses = 230 combinations with smart practice.">
+  <meta property="og:description" content="Master French conjugation for TEF Canada. 30 verbs × 10 tenses = 300 combinations with smart practice.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇫🇷</text></svg>">
@@ -265,7 +265,7 @@
     .goal-modal-buttons .btn { flex: 1; }
     .combo-grid-section { margin-top: 16px; }
     .combo-grid-title { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px; }
-    .combo-mini-grid { display: grid; grid-template-columns: repeat(23, 1fr); gap: 2px; }
+    .combo-mini-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
     .combo-cell { aspect-ratio: 1; border-radius: 2px; background: var(--bg-tertiary); }
     .combo-cell.mastered { background: var(--success); }
     .combo-cell.practiced { background: var(--warning); }
@@ -310,20 +310,20 @@
         <div class="coverage-bar">
           <div class="coverage-header">
             <span class="coverage-label">Combo Coverage (all-time)</span>
-            <span class="coverage-value" id="coverageValue">0/230</span>
+            <span class="coverage-value" id="coverageValue">0/300</span>
           </div>
           <div class="coverage-track">
             <div class="coverage-fill" id="coverageFill" style="width: 0%"></div>
           </div>
         </div>
         <div class="verb-tooltip-trigger">
-          23 verbs × 10 tenses — hover for details
+          30 verbs × 10 tenses — hover for details
           <div class="verb-tooltip">
-            <div class="verb-tooltip-title">All 23 Verbs</div>
+            <div class="verb-tooltip-title">All 30 Verbs</div>
             <div class="verb-tooltip-list">
               <div class="verb-tooltip-section"><strong>⭐ Essential:</strong> être, avoir</div>
               <div class="verb-tooltip-section"><strong>📝 TEF B2:</strong> devenir, permettre, sembler</div>
-              <div class="verb-tooltip-section"><strong>Core 18:</strong> faire, aller, pouvoir, vouloir, devoir, savoir, venir, prendre, dire, mettre, voir, partir, sortir, finir, choisir, attendre, répondre, écrire</div>
+              <div class="verb-tooltip-section"><strong>Core 25:</strong> faire, aller, pouvoir, vouloir, devoir, savoir, venir, prendre, dire, mettre, voir, partir, sortir, finir, choisir, attendre, répondre, écrire, arriver, jouer, reconnaître, comprendre, apprendre, découvrir, recevoir</div>
             </div>
             <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
               <div class="verb-tooltip-title">8 Tenses</div>
@@ -434,7 +434,7 @@
             </div>
           </div>
           <div class="combo-grid-section">
-            <div class="combo-grid-title">230 Combos: 🟩 mastered 🟨 practiced 🟥 weak ⬜ new</div>
+            <div class="combo-grid-title">300 Combos: 🟩 mastered 🟨 practiced 🟥 weak ⬜ new</div>
             <div class="combo-mini-grid" id="comboMiniGrid"></div>
           </div>
         </div>
@@ -507,7 +507,14 @@
       { infinitive: "écrire", meaning: "to write", group: "irregular" },
       { infinitive: "devenir", meaning: "to become", group: "-ir (être)", tef: true },
       { infinitive: "permettre", meaning: "to allow", group: "-re", tef: true },
-      { infinitive: "sembler", meaning: "to seem", group: "-er", tef: true }
+      { infinitive: "sembler", meaning: "to seem", group: "-er", tef: true },
+      { infinitive: "arriver", meaning: "to arrive", group: "-er (être)" },
+      { infinitive: "jouer", meaning: "to play", group: "-er" },
+      { infinitive: "reconnaître", meaning: "to recognize", group: "irregular" },
+      { infinitive: "comprendre", meaning: "to understand", group: "-re" },
+      { infinitive: "apprendre", meaning: "to learn", group: "-re" },
+      { infinitive: "découvrir", meaning: "to discover", group: "irregular" },
+      { infinitive: "recevoir", meaning: "to receive", group: "irregular" }
     ];
 
     const tenseList = [
@@ -801,6 +808,90 @@
         plusQueParfait: ["avais semblé", "avais semblé", "avait semblé", "avions semblé", "aviez semblé", "avaient semblé"],
         futurAnterieur: ["aurai semblé", "auras semblé", "aura semblé", "aurons semblé", "aurez semblé", "auront semblé"],
         conditionnelPasse: ["aurais semblé", "aurais semblé", "aurait semblé", "aurions semblé", "auriez semblé", "auraient semblé"]
+      },
+      "arriver": {
+        present: ["arrive", "arrives", "arrive", "arrivons", "arrivez", "arrivent"],
+        passeCompose: ["suis arrivé(e)", "es arrivé(e)", "est arrivé(e)", "sommes arrivé(e)s", "êtes arrivé(e)(s)", "sont arrivé(e)s"],
+        imparfait: ["arrivais", "arrivais", "arrivait", "arrivions", "arriviez", "arrivaient"],
+        futurSimple: ["arriverai", "arriveras", "arrivera", "arriverons", "arriverez", "arriveront"],
+        conditionnel: ["arriverais", "arriverais", "arriverait", "arriverions", "arriveriez", "arriveraient"],
+        subjonctifPresent: ["arrive", "arrives", "arrive", "arrivions", "arriviez", "arrivent"],
+        subjonctifPasse: ["sois arrivé(e)", "sois arrivé(e)", "soit arrivé(e)", "soyons arrivé(e)s", "soyez arrivé(e)(s)", "soient arrivé(e)s"],
+        plusQueParfait: ["étais arrivé(e)", "étais arrivé(e)", "était arrivé(e)", "étions arrivé(e)s", "étiez arrivé(e)(s)", "étaient arrivé(e)s"],
+        futurAnterieur: ["serai arrivé(e)", "seras arrivé(e)", "sera arrivé(e)", "serons arrivé(e)s", "serez arrivé(e)(s)", "seront arrivé(e)s"],
+        conditionnelPasse: ["serais arrivé(e)", "serais arrivé(e)", "serait arrivé(e)", "serions arrivé(e)s", "seriez arrivé(e)(s)", "seraient arrivé(e)s"]
+      },
+      "jouer": {
+        present: ["joue", "joues", "joue", "jouons", "jouez", "jouent"],
+        passeCompose: ["ai joué", "as joué", "a joué", "avons joué", "avez joué", "ont joué"],
+        imparfait: ["jouais", "jouais", "jouait", "jouions", "jouiez", "jouaient"],
+        futurSimple: ["jouerai", "joueras", "jouera", "jouerons", "jouerez", "joueront"],
+        conditionnel: ["jouerais", "jouerais", "jouerait", "jouerions", "joueriez", "joueraient"],
+        subjonctifPresent: ["joue", "joues", "joue", "jouions", "jouiez", "jouent"],
+        subjonctifPasse: ["aie joué", "aies joué", "ait joué", "ayons joué", "ayez joué", "aient joué"],
+        plusQueParfait: ["avais joué", "avais joué", "avait joué", "avions joué", "aviez joué", "avaient joué"],
+        futurAnterieur: ["aurai joué", "auras joué", "aura joué", "aurons joué", "aurez joué", "auront joué"],
+        conditionnelPasse: ["aurais joué", "aurais joué", "aurait joué", "aurions joué", "auriez joué", "auraient joué"]
+      },
+      "reconnaître": {
+        present: ["reconnais", "reconnais", "reconnaît", "reconnaissons", "reconnaissez", "reconnaissent"],
+        passeCompose: ["ai reconnu", "as reconnu", "a reconnu", "avons reconnu", "avez reconnu", "ont reconnu"],
+        imparfait: ["reconnaissais", "reconnaissais", "reconnaissait", "reconnaissions", "reconnaissiez", "reconnaissaient"],
+        futurSimple: ["reconnaîtrai", "reconnaîtras", "reconnaîtra", "reconnaîtrons", "reconnaîtrez", "reconnaîtront"],
+        conditionnel: ["reconnaîtrais", "reconnaîtrais", "reconnaîtrait", "reconnaîtrions", "reconnaîtriez", "reconnaîtraient"],
+        subjonctifPresent: ["reconnaisse", "reconnaisses", "reconnaisse", "reconnaissions", "reconnaissiez", "reconnaissent"],
+        subjonctifPasse: ["aie reconnu", "aies reconnu", "ait reconnu", "ayons reconnu", "ayez reconnu", "aient reconnu"],
+        plusQueParfait: ["avais reconnu", "avais reconnu", "avait reconnu", "avions reconnu", "aviez reconnu", "avaient reconnu"],
+        futurAnterieur: ["aurai reconnu", "auras reconnu", "aura reconnu", "aurons reconnu", "aurez reconnu", "auront reconnu"],
+        conditionnelPasse: ["aurais reconnu", "aurais reconnu", "aurait reconnu", "aurions reconnu", "auriez reconnu", "auraient reconnu"]
+      },
+      "comprendre": {
+        present: ["comprends", "comprends", "comprend", "comprenons", "comprenez", "comprennent"],
+        passeCompose: ["ai compris", "as compris", "a compris", "avons compris", "avez compris", "ont compris"],
+        imparfait: ["comprenais", "comprenais", "comprenait", "comprenions", "compreniez", "comprenaient"],
+        futurSimple: ["comprendrai", "comprendras", "comprendra", "comprendrons", "comprendrez", "comprendront"],
+        conditionnel: ["comprendrais", "comprendrais", "comprendrait", "comprendrions", "comprendriez", "comprendraient"],
+        subjonctifPresent: ["comprenne", "comprennes", "comprenne", "comprenions", "compreniez", "comprennent"],
+        subjonctifPasse: ["aie compris", "aies compris", "ait compris", "ayons compris", "ayez compris", "aient compris"],
+        plusQueParfait: ["avais compris", "avais compris", "avait compris", "avions compris", "aviez compris", "avaient compris"],
+        futurAnterieur: ["aurai compris", "auras compris", "aura compris", "aurons compris", "aurez compris", "auront compris"],
+        conditionnelPasse: ["aurais compris", "aurais compris", "aurait compris", "aurions compris", "auriez compris", "auraient compris"]
+      },
+      "apprendre": {
+        present: ["apprends", "apprends", "apprend", "apprenons", "apprenez", "apprennent"],
+        passeCompose: ["ai appris", "as appris", "a appris", "avons appris", "avez appris", "ont appris"],
+        imparfait: ["apprenais", "apprenais", "apprenait", "apprenions", "appreniez", "apprenaient"],
+        futurSimple: ["apprendrai", "apprendras", "apprendra", "apprendrons", "apprendrez", "apprendront"],
+        conditionnel: ["apprendrais", "apprendrais", "apprendrait", "apprendrions", "apprendriez", "apprendraient"],
+        subjonctifPresent: ["apprenne", "apprennes", "apprenne", "apprenions", "appreniez", "apprennent"],
+        subjonctifPasse: ["aie appris", "aies appris", "ait appris", "ayons appris", "ayez appris", "aient appris"],
+        plusQueParfait: ["avais appris", "avais appris", "avait appris", "avions appris", "aviez appris", "avaient appris"],
+        futurAnterieur: ["aurai appris", "auras appris", "aura appris", "aurons appris", "aurez appris", "auront appris"],
+        conditionnelPasse: ["aurais appris", "aurais appris", "aurait appris", "aurions appris", "auriez appris", "auraient appris"]
+      },
+      "découvrir": {
+        present: ["découvre", "découvres", "découvre", "découvrons", "découvrez", "découvrent"],
+        passeCompose: ["ai découvert", "as découvert", "a découvert", "avons découvert", "avez découvert", "ont découvert"],
+        imparfait: ["découvrais", "découvrais", "découvrait", "découvrions", "découvriez", "découvraient"],
+        futurSimple: ["découvrirai", "découvriras", "découvrira", "découvrirons", "découvrirez", "découvriront"],
+        conditionnel: ["découvrirais", "découvrirais", "découvrirait", "découvririons", "découvririez", "découvriraient"],
+        subjonctifPresent: ["découvre", "découvres", "découvre", "découvrions", "découvriez", "découvrent"],
+        subjonctifPasse: ["aie découvert", "aies découvert", "ait découvert", "ayons découvert", "ayez découvert", "aient découvert"],
+        plusQueParfait: ["avais découvert", "avais découvert", "avait découvert", "avions découvert", "aviez découvert", "avaient découvert"],
+        futurAnterieur: ["aurai découvert", "auras découvert", "aura découvert", "aurons découvert", "aurez découvert", "auront découvert"],
+        conditionnelPasse: ["aurais découvert", "aurais découvert", "aurait découvert", "aurions découvert", "auriez découvert", "auraient découvert"]
+      },
+      "recevoir": {
+        present: ["reçois", "reçois", "reçoit", "recevons", "recevez", "reçoivent"],
+        passeCompose: ["ai reçu", "as reçu", "a reçu", "avons reçu", "avez reçu", "ont reçu"],
+        imparfait: ["recevais", "recevais", "recevait", "recevions", "receviez", "recevaient"],
+        futurSimple: ["recevrai", "recevras", "recevra", "recevrons", "recevrez", "recevront"],
+        conditionnel: ["recevrais", "recevrais", "recevrait", "recevrions", "recevriez", "recevraient"],
+        subjonctifPresent: ["reçoive", "reçoives", "reçoive", "recevions", "receviez", "reçoivent"],
+        subjonctifPasse: ["aie reçu", "aies reçu", "ait reçu", "ayons reçu", "ayez reçu", "aient reçu"],
+        plusQueParfait: ["avais reçu", "avais reçu", "avait reçu", "avions reçu", "aviez reçu", "avaient reçu"],
+        futurAnterieur: ["aurai reçu", "auras reçu", "aura reçu", "aurons reçu", "aurez reçu", "auront reçu"],
+        conditionnelPasse: ["aurais reçu", "aurais reçu", "aurait reçu", "aurions reçu", "auriez reçu", "auraient reçu"]
       }
     };
 
@@ -820,6 +911,10 @@
     const ALL_COMBOS = [];
     verbs.forEach(v => tenseList.forEach(t => ALL_COMBOS.push(`${v.infinitive}__${t.id}`)));
 
+    // Tenses we want to over-represent in every daily session, with a per-session quota each.
+    const FORCED_TENSES = ["subjonctifPresent", "subjonctifPasse", "conditionnel", "conditionnelPasse"];
+    const FORCED_QUOTA = 2; // minimum drills per forced tense per daily session
+
     let activeTenses = tenseList.map(t => t.id);
     let currentVerb = null, currentTense = null;
     let streak = 0, correct = 0, total = 0;
@@ -828,6 +923,7 @@
     let isDark = false, goalShown = false;
     let sessionEtreDone = false, sessionAvoirDone = false;
     let sessionUsedCombos = new Set();
+    let forcedTenseCounts = {}; // tenseId -> how many times served this session
     let perfData = loadPerfData();
 
     function loadPerfData() {
@@ -843,6 +939,40 @@
     }
 
     function getTodayStr() { return new Date().toISOString().split("T")[0]; }
+
+    // ---- Same-day session persistence (survives reload; resets on a new calendar day) ----
+    const SESSION_KEY = "conjugueur-session";
+
+    function saveSession() {
+      try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify({
+          date: getTodayStr(),
+          streak, correct, total, verbsCompleted, timerSeconds, goalShown,
+          sessionEtreDone, sessionAvoirDone,
+          usedCombos: [...sessionUsedCombos],
+          forcedTenseCounts
+        }));
+      } catch (e) {}
+    }
+
+    function restoreSession() {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (!raw) return;
+        const s = JSON.parse(raw);
+        if (s.date !== getTodayStr()) { localStorage.removeItem(SESSION_KEY); return; } // new day → fresh start
+        streak = s.streak || 0;
+        correct = s.correct || 0;
+        total = s.total || 0;
+        verbsCompleted = s.verbsCompleted || 0;
+        timerSeconds = s.timerSeconds || 0;
+        goalShown = !!s.goalShown;
+        sessionEtreDone = !!s.sessionEtreDone;
+        sessionAvoirDone = !!s.sessionAvoirDone;
+        sessionUsedCombos = new Set(s.usedCombos || []);
+        forcedTenseCounts = s.forcedTenseCounts || {};
+      } catch (e) {}
+    }
 
     function getComboKey(v, t) { return `${v}__${t}`; }
 
@@ -885,16 +1015,32 @@
         return pickNextCombo();
       }
 
-      const weak = validCombos.filter(k => isWeak(k));
-      const never = validCombos.filter(k => isNeverPracticed(k));
-      const rest = validCombos.filter(k => !isWeak(k) && !isNeverPracticed(k));
+      // Force subjonctif / conditionnel: each active forced tense must reach FORCED_QUOTA
+      // per daily session. Spread them across the session instead of front-loading: force
+      // probabilistically while there's slack, then hard-force near the end of the goal so
+      // the quota is always met.
+      const underQuotaForced = FORCED_TENSES.filter(t =>
+        activeTenses.includes(t) && (forcedTenseCounts[t] || 0) < FORCED_QUOTA
+      );
+      const forcedRemaining = underQuotaForced.reduce((n, t) => n + (FORCED_QUOTA - (forcedTenseCounts[t] || 0)), 0);
+      const goalRemaining = Math.max(0, 15 - verbsCompleted);
+      // Hard-force once remaining forced drills would otherwise not fit; else force ~half the time.
+      const mustForce = forcedRemaining > 0 && (forcedRemaining >= goalRemaining || Math.random() < 0.5);
+      const forcedValid = (underQuotaForced.length && mustForce)
+        ? validCombos.filter(k => underQuotaForced.includes(k.split("__")[1]))
+        : [];
+      const pickPool = forcedValid.length ? forcedValid : validCombos;
+
+      const weak = pickPool.filter(k => isWeak(k));
+      const never = pickPool.filter(k => isNeverPracticed(k));
+      const rest = pickPool.filter(k => !isWeak(k) && !isNeverPracticed(k));
 
       let pool = [];
       if (weak.length > 0) pool.push(...weak, ...weak, ...weak);
       if (never.length > 0) pool.push(...never, ...never);
       if (rest.length > 0) pool.push(...rest);
 
-      if (pool.length === 0) pool = validCombos;
+      if (pool.length === 0) pool = pickPool;
 
       const chosen = pool[Math.floor(Math.random() * pool.length)];
       const [verb, tense] = chosen.split("__");
@@ -904,14 +1050,26 @@
     function init() {
       loadTheme();
       checkDayStreak();
+      restoreSession();
       renderTensePills();
       renderHistoryGrid();
       updateCoverage();
       updateAllTimeStats();
+      // Rehydrate today's in-progress session into the UI.
+      updateSessionStats();
+      updateGoal();
+      updateChecklist();
+      renderTimer();
       startTimer();
       nextVerb();
       setupTabs();
       setupGoalModal();
+    }
+
+    function renderTimer() {
+      const m = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+      const s = (timerSeconds % 60).toString().padStart(2, "0");
+      document.getElementById("timer").textContent = `${m}:${s}`;
     }
 
     function checkDayStreak() {
@@ -960,9 +1118,8 @@
     function startTimer() {
       timerInterval = setInterval(() => {
         timerSeconds++;
-        const m = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
-        const s = (timerSeconds % 60).toString().padStart(2, "0");
-        document.getElementById("timer").textContent = `${m}:${s}`;
+        renderTimer();
+        if (timerSeconds % 5 === 0) saveSession(); // persist elapsed time periodically
       }, 1000);
     }
 
@@ -985,7 +1142,6 @@
       currentVerb = verbs.find(v => v.infinitive === verb);
       currentTense = tense;
       const comboKey = getComboKey(verb, tense);
-      sessionUsedCombos.add(comboKey);
       isNewCombo = isNeverPracticed(comboKey);
 
       document.getElementById("infinitive").textContent = currentVerb.infinitive;
@@ -1054,7 +1210,12 @@
       const isPerfect = correctCount === 6 && !revealed;
       if (isPerfect) { correct++; streak++; } else { streak = 0; }
 
+      // Mark this combo/forced-tense as consumed for the session only once it's actually completed.
+      sessionUsedCombos.add(getComboKey(currentVerb.infinitive, currentTense));
+      if (FORCED_TENSES.includes(currentTense)) forcedTenseCounts[currentTense] = (forcedTenseCounts[currentTense] || 0) + 1;
+
       recordPerformance(currentVerb.infinitive, currentTense, isPerfect);
+      saveSession();
       updateSessionStats(); updateGoal(); updateChecklist(); updateCoverage(); showResult(correctCount);
 
       document.getElementById("tipSection").classList.add("show");
@@ -1124,8 +1285,8 @@
 
     function updateCoverage() {
       const cov = getCoverage();
-      document.getElementById("coverageValue").textContent = `${cov}/230`;
-      document.getElementById("coverageFill").style.width = `${(cov / 230) * 100}%`;
+      document.getElementById("coverageValue").textContent = `${cov}/${ALL_COMBOS.length}`;
+      document.getElementById("coverageFill").style.width = `${(cov / ALL_COMBOS.length) * 100}%`;
     }
 
     function renderHistoryGrid() {
@@ -1159,7 +1320,7 @@
 
       neverList.innerHTML = neverCombos.length > 0
         ? neverCombos.map(c => `<div class="weak-item"><span class="weak-item-name">${c.verb} · ${c.tense}</span><span class="weak-item-stat">NEW</span></div>`).join("")
-        : `<div class="empty-state">All 230 combos practiced! 🎉</div>`;
+        : `<div class="empty-state">All ${ALL_COMBOS.length} combos practiced! 🎉</div>`;
     }
 
     function renderComboGrid() {
@@ -1189,8 +1350,19 @@
     document.getElementById("resetBtn").addEventListener("click", () => {
       if (confirm("Reset all progress? This cannot be undone.")) {
         localStorage.removeItem("conjugueur-v2");
+        localStorage.removeItem(SESSION_KEY);
         perfData = loadPerfData();
+        streak = correct = total = verbsCompleted = timerSeconds = 0;
+        goalShown = sessionEtreDone = sessionAvoirDone = false;
+        sessionUsedCombos = new Set();
+        forcedTenseCounts = {};
         renderHistoryGrid(); updateCoverage(); updateAllTimeStats();
+        updateSessionStats(); updateGoal(); updateChecklist(); renderTimer();
+        document.querySelectorAll(".checklist-item").forEach(el => {
+          el.classList.remove("done");
+          el.querySelector("svg")?.classList.add("hidden");
+        });
+        nextVerb();
         alert("Data reset.");
       }
     });
